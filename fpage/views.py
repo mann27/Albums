@@ -49,18 +49,18 @@ def favorite(request, album_id):
         selected_song.save()
         return render(request, 'fpage/detail.html', {'album' : album})
 
-     """def favAlbum(request, album_title):
-     album=get_object_or_404(Album, title=album_title)
-     try:
-         selected_album = album.album_set.get(title=request.POST['album'])
-     except (KeyError, Album.DoesNotExist):
-         return render(request, 'fpage/index.html',{
-             'album' : album ,
-             'error_message' : "you didn't select a valid album"})
-     else:
-         selected_album.is_favorite1 = True
-         selected_album.save()
-         return render(request, 'fpage/index.html' , {'album' : album})
+     """def favAlbum(request, album_id):
+    album=get_object_or_404(Album, id=album_id)
+    try: 
+        selected_album = album.album_set.get(title=request.POST['album']) 
+    except (KeyError, Album.DoesNotExist): 
+        return render(request, 'fpage/index.html',{
+            'album' : album , 
+            'error_message' : "you didn't select a valid album"}) 
+    else: 
+        selected_album.is_favorite1 = True 
+        selected_album.save()   
+        return render(request, 'fpage/index.html' , {'all_albums' : album})
         """
 
 
