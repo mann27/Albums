@@ -11,7 +11,7 @@ It helps to store your albums and their respective songs in one place.
   &nbsp&nbsppip install django==1.11.2<br/>
 </p>
 <p>
- &nbsp&nbsp#run<br/>
+ &nbsp&nbsp&nbsp#run<br/>
   &nbsp&nbspopen terminal: <br/>
    &nbsp&nbspcd website<br/>
    &nbsp&nbsppython manage.py runserver
