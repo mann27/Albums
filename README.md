@@ -6,7 +6,7 @@ It helps to store your albums and their respective songs in one place.
 #Installation 
 <p>
  &nbsp&nbsp#prerequisite<br/>
-  &nbsp&nbspcheck on cmd:<br/>
+  &nbsp&nbsp&nbspcheck on cmd:<br/>
   &nbsp&nbsppython<br/>
   &nbsp&nbsppip install django==1.11.2<br/>
 </p>
