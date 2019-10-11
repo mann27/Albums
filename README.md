@@ -12,7 +12,7 @@ It helps to store your albums and their respective songs in one place.
 </p>
 <p>
  &nbsp&nbsp&nbsp#run<br/>
-  &nbsp&nbspopen terminal: <br/>
+  &nbsp&nbsp&nbspopen terminal: <br/>
    &nbsp&nbspcd website<br/>
    &nbsp&nbsppython manage.py runserver
 </p>
