@@ -14,5 +14,5 @@ It helps to store your albums and their respective songs in one place.
  &nbsp&nbsp&nbsp#run<br/>
   &nbsp&nbsp&nbspopen terminal: <br/>
    &nbsp&nbsp go to the root directory<br/>
-   &nbsp&nbsp python manage.py runserver hacktober fest free t shirt
+   &nbsp&nbsp python manage.py runserver
 </p>
