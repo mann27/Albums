@@ -13,6 +13,6 @@ It helps to store your albums and their respective songs in one place.
 <p>
  &nbsp&nbsp&nbsp#run<br/>
   &nbsp&nbsp&nbspopen terminal: <br/>
-   &nbsp&nbsp go to the root directory<br/>
+   &nbsp&nbsp go to the root folder<br/>
    &nbsp&nbsp python manage.py runserver
 </p>
