@@ -1,6 +1,6 @@
 # Albums
-python and html project to add and favourite songs and albums.<br/>
-It helps to store your albums and their respective songs all in one place.
+A python and html project to add your favourite songs and albums.<br/>
+It helps you to store your albums and their respective songs all in one place.
 
 
 #Installation 
