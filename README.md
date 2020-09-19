@@ -1,6 +1,6 @@
 # Albums
 
-python(using django framework) and html project to add and favourite songs and albums.
+A Python(using django framework) and html project to add your favourite songs and albums.
 
 It helps to store your albums and their respective songs all in one place.
 
@@ -8,8 +8,8 @@ This project is a part of SLOP program.
 
 # Installation 
 
-## prerequisite
-python
+## Prerequisite
+Python
 
 ## Setup the project locally
 
