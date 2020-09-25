@@ -1,36 +1,69 @@
 # Albums
+A Django web app to store your favorite songs and albums in one place. 
 
-python(using django framework) and html project to add and favourite songs and albums.
-
-It helps to store your albums and their respective songs all in one place.
-
-This project is a part of SLOP program.
 
 # Installation 
 
-## prerequisite
-python
+## Prerequisite
+* Python
+* Django
+
 
 ## Setup the project locally
+- Clone the repo.
+    ```
+    git clone https://github.com/mann27/Albums.git
+    ```
 
--Clone the repo.
-
--Create a virtual environment. python3 -m venv <your-venv-name> (make sure you are not inside the repo when you create the virtual environment)
+- Create a virtual environment. Make sure you are not inside the repo when you create the virtual environment.
+    ```
+    python3 -m venv <your-venv-name>
+    ```
  
--Activate the virtual environment. source <your-venv-name>/bin/activate
+- Activate the virtual environment. 
+    ```
+    source <your-venv-name>/bin/activate
+    ```
  
--Go inside the repo folder. Now you should be inside a folder called Albums
+- Go inside the repo folder. Now you should be inside a folder called Albums
 
--pip3 install -r requirements.txt
+- Install all the requirements
+    ```
+    pip3 install -r requirements.txt
+    ```
 
--To run the project: python manage.py runserver
+- Create database tables.
+    ```
+    python manage.py migrate
+    ```
 
--If you get some migration related error. python manage.py migrate
+- Run your program
+    ```
+    python manage.py runserver
+    ```
+
+# Contribution Guidelines
+
+- Fork and star the repo
+- Create your feature branch
+    ```
+    git checkout -b <feature-name>
+    ```
+- Commit your changes
+    ```
+    git commit -am "Meaningful commit message
+    ```
+- Push to the branch
+    ```
+    git push origin <feature-name>
+    ```
+
+- If you see any bug or you have a feature suggestion, create an issue.
+- Start working on an issue only after it has been approved by the maintainers.
+- Wait till the end of the day to get the reply on an issue or review of a PR.
 
 
-## Contribute
-If you see any issues or a possible feature create an issue.
-
-Fork and star the repo and start working on the issue after informing in the comments.
-
-Wait till the EOD to get the reply on a issue or review of a PR.
+## SLoP Maintainers
+This project is a part of the SLOP program and is being currently maintained by:
+- [Mann Shah](https://github.com/mann27)
+- [Shivam Yadav](https://github.com/ExpressHermes)
