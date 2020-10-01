@@ -29,7 +29,7 @@ def index(request):
     }
     return render(request, 'fpage/index.html', context)
    
-def detail(request, album_id):
+def detail(request,album_id):
     
     album = get_object_or_404(Album, id=album_id)
     return render(request, 'fpage/detail.html', {'album' : album})
@@ -49,6 +49,7 @@ def favorite(request, album_id):
         selected_song.save()
         return render(request, 'fpage/detail.html', {'album' : album})
 
+     
      """def favAlbum(request, album_id):
     album=get_object_or_404(Album, id=album_id)
     try: 
