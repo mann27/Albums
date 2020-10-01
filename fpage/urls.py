@@ -3,6 +3,13 @@ from . import views
 
 app_name = 'music'
 
+
+# index path directs to the index of the page
+# music detail along with a key known as the album id
+# favorite music detail along with a key known as the album id
+# changed the urls to path according the latest django version 
+
+
 urlpatterns = [
     #/music/
     path('index/', views.index, name='index'),
