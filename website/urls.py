@@ -5,5 +5,5 @@ from django.contrib import admin
 # changed the urls to path according the latest django version 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', include('fpage.urls')),
+    path('', include('fpage.urls', namespace='fpage')),
 ]
