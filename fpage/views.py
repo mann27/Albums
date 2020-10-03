@@ -1,11 +1,10 @@
-from django .http import Http404
-from django .http import HttpResponse
-from django .template import loader 
-from django .shortcuts import render,get_object_or_404
-from django.views import generic
-from .models import Album, Song
-#from django.db.models import Q
+from django.shortcuts import get_object_or_404, render
+from django.template import loader
 
+from .models import Album, Song
+
+
+# from django.db.models import Q
 
 
 # Generic method for making a view.
@@ -21,11 +20,12 @@ from .models import Album, Song
    # template_name='fpage/detail.html'
 
 def index(request):
-    all_albums= Album.objects.all()
-
+    '''Index View for the fpage app. Home page of the app.
+        To Show all the albums at avaiable in the DB.'''
+    all_albums = Album.objects.all()
     template = loader.get_template('fpage/index.html')
     context = {
-        'all_albums' : all_albums,
+        'all_albums': all_albums,
     }
     return render(request, 'fpage/index.html', context)
    
