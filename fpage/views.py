@@ -1,12 +1,14 @@
-from django.shortcuts import get_object_or_404, render
+from django.shortcuts import get_object_or_404, render, redirect
 from django.template import loader
-
+from .forms import CreateUserForm
 from .models import Album, Song
+from django.contrib import messages
+from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.decorators import login_required
 
 
 # from django.db.models import Q
-
-
 # Generic method for making a view.
 
 #class IndexView(generic.ListView):
@@ -19,6 +21,48 @@ from .models import Album, Song
   #  model = Album
    # template_name='fpage/detail.html'
 
+def registerPage(request):
+    if request.user.is_authenticated:
+        return redirect('fpage:index')
+    else:
+        form = CreateUserForm()
+        if request.method == 'POST':
+            form = CreateUserForm(request.POST)
+            if form.is_valid():
+                form.save()
+                user = form.cleaned_data.get('username')
+                messages.success(request, 'Account was created for ' + user)
+
+                return redirect('fpage:login')
+			
+
+        context = {'form':form}
+        return render(request, 'fpage/register.html', context)
+
+def loginPage(request):
+    if request.user.is_authenticated:
+        return redirect('fpage:index')
+    else:
+        if request.method == 'POST':
+            username = request.POST.get('username')
+            password =request.POST.get('password')
+
+            user = authenticate(request, username=username, password=password)
+
+            if user is not None:
+                login(request, user)
+                return redirect('fpage:index')
+            else:
+                messages.info(request, 'Username OR password is incorrect')
+
+        context = {}
+        return render(request, 'fpage/login.html', context)
+
+def logoutUser(request):
+	logout(request)
+	return redirect('fpage:login')
+
+@login_required(login_url='fpage:login')
 def index(request):
     '''Index View for the fpage app. Home page of the app.
         To Show all the albums at avaiable in the DB.'''
@@ -28,12 +72,15 @@ def index(request):
         'all_albums': all_albums,
     }
     return render(request, 'fpage/index.html', context)
-   
+
+@login_required(login_url='fpage:login')   
 def detail(request,album_id):
     
     album = get_object_or_404(Album, id=album_id)
     return render(request, 'fpage/detail.html', {'album' : album})
 
+
+@login_required(login_url='fpage:login')
 def favorite(request, album_id):
 
      album = get_object_or_404(Album, id=album_id)
