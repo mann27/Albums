@@ -6,7 +6,7 @@ app_name = 'music'
 
 # music detail along with a key known as the album id
 # favorite music detail along with a key known as the album id
-# changed the urls to path according the latest django version 
+# changed the urls to path according the latest django version
 
 
 urlpatterns = [
