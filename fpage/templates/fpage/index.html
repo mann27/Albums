@@ -80,8 +80,8 @@
         </li>
         <li class="inactive">
           <a href="#">
-            <span class="glyphicon glyphicon-off"></span>
-            Log-out
+            <span class="hello-msg">Hello, {{request.user}}</span>
+            <span ><a  class="hello-msg" href="{% url 'fpage:logout' %}">Logout</a></span>
           </a>
         </li>
       </ul>

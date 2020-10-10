@@ -6,11 +6,14 @@ app_name = 'music'
 
 # music detail along with a key known as the album id
 # favorite music detail along with a key known as the album id
-# changed the urls to path according the latest django version 
+# changed the urls to path according the latest django version
 
 
 urlpatterns = [
     #/music/
+    path('register/', views.registerPage, name="register"),
+	path('login/', views.loginPage, name="login"),  
+	path('logout/', views.logoutUser, name="logout"),
     path('', views.index, name='index'),
 
     # music/<album_id>/
