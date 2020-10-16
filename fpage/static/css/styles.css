@@ -65,6 +65,12 @@ html {
 }
 
 .nav-bg{
-  background-color: rgb(145, 96, 168) !important;
+  background-color: #004643 !important;
 }
 div.container{height: 100vh !important;}
+
+.navbar-nav.navbar-center { 
+  position: absolute; 
+  left: 50%; 
+  transform: translatex(-50%); 
+} 
