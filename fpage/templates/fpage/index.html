@@ -1,100 +1,78 @@
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
-<link href="https://fonts.googleapis.com/css?family=Satisfy" rel="stylesheet" type="text/css" />
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
-<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
-
-<head>
-  <title>Albums</title>
-</head>
-
-<nav class="navbar navbar-inverse">
-  <div class="container-fluid">
-    <!--header-->
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-
-      <a class="navbar-brand" style="
-          height: 35px;
-          color: rgb(14, 233, 222);
-          text-decoration: none;
-          vertical-align: text-top;
-        " href="{% url 'music:index' %}">
-        <font size="+3"><i><b>Albums</b></i> &nbsp&nbsp&nbsp&nbsp&nbsp
-          &nbsp</font>
-      </a>
-    </div>
-    <!--items-->
-
-    <div class="collapse navbar-collapse" id="myNavbar">
-      <ul class="nav navbar-nav">
-        <li class="inactive">
-          <a href="{% url 'music:index' %}">
-            <span class="glyphicon glyphicon-cd"></span>&nbsp Albums
-          </a>
-        </li>
-        <li class="inactive">
-          <a href="#">
-            <span class="glyphicon glyphicon-music"></span>&nbsp Songs &nbsp
-            &nbsp &nbsp &nbsp
-          </a>
-        </li>
-      </ul>
-      <form class="navbar-form navbar-left" role="search" method="get" action="#">
-        <div class="form-group">
-          <input type="text" class="form-control" name="q" value="" />
+{% extends "fpage/main.html" %}
+{% block content %}
+<body>
+<!--Navbar -->
+<nav class=" navbar navbar-expand-lg navbar-dark nav-bg lighten-1">
+  <a class="navbar-brand" style="
+            height: 55px;
+            color: rgb(205, 224, 224);
+            text-decoration: none;
+            vertical-align: text-top;
+          " href="{% url 'music:index' %}">
+          <font size="+3"><i><b>Albums</b></i> &nbsp&nbsp&nbsp&nbsp&nbsp</font>
+        </a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent-555"
+    aria-controls="navbarSupportedContent-555" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarSupportedContent-555">
+    <ul class="nav navbar-nav navbar-center">
+      <li class="nav-item active">
+        <a class="nav-link" href="{% url 'music:index' %}">Albums 
+          <span class="fa fa-music" aria-hidden="true"></span>&nbsp&nbsp&nbsp&nbsp
+        </a>
+      </li>
+      <li class="nav-item active">
+        <a class="nav-link" href="#">Songs
+          <span class="fa fa-headphones" aria-hidden="true"></span>&nbsp&nbsp&nbsp&nbsp
+        </a>
+      </li>
+      <li class="nav-item active">
+        <a class="nav-link" href="#">Add Album
+          <span class="fa fa-plus" aria-hidden="true"></span>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+        </a>
+      </li>
+      <nav class="navbar navbar-expand-sm navbar-dark">
+        <form class="form-inline" action="/action_page.php">
+          <input class="form-control mr-sm-2" type="text" placeholder="Search">
+          <button class="btn btn-dark" type="submit">Search</button>
+        </form>
+      </nav> 
+    </ul>
+    <ul class="navbar-nav ml-auto nav-flex-icons">
+     <li class="nav-item active dropdown">
+        <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink-4" data-toggle="dropdown"
+          aria-haspopup="true" aria-expanded="false">
+          <i class="fas fa-user">&nbsp&nbsp&nbsp</i>{{request.user}}</a>
+        <div class="dropdown-menu dropdown-menu-right dropdown-info" aria-labelledby="navbarDropdownMenuLink-4">
+          <a class="dropdown-item" href="{% url 'fpage:logout' %}">Log out</a>
         </div>
-        <button type="submit" class="btn btn-default">Search</button>
-      </form>
-      <ul class="nav navbar-nav navbar-right">
-        <li class="inactive">
-          <a href="#">
-            <span class="glyphicon glyphicon-plus"></span>
-            Add Album
-          </a>
-        </li>
-        <li class="inactive">
-          <a href="#">
-            <span class="hello-msg">Hello, {{request.user}}</span>
-            <span><a class="hello-msg" href="{% url 'fpage:logout' %}">Logout</a></span>
-          </a>
-        </li>
-      </ul>
-    </div>
+      </li>
+    </ul>
   </div>
 </nav>
-
-<body style="
-    background: url(http://www.ideasphere.com/wp-content/uploads/2016/08/Savin-NY-Website-Background-Web-1.jpg);
-    background-size: 100%;
-    background-repeat: no-repeat;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
-  ">
-  <div class="container">
+<!--/.Navbar -->                                                                                     
+<div id="background">
+  <div class="container pt-5">
     <div class="row">
-      <ul style="list-style-type: none">
+      <ul class="d-flex w-100 justify-content-between" style="list-style-type: none">
         {% for album in all_albums %}
         <li>
-          <div class="col-sm-4">
-            <img src="{{album.album_logo}}" height="200" width="150" />
+          <div class="col">
+            <img src="{{album.album_logo_link}}" height="200" width="150" />
             <h2>{{ album.album_title }}</h2>
 
             <a href="{% url 'music:detail' album.id %}" class="btn btn-info" role="button">Details</a>
 
             <button type="button" class="btn btn-default btn-sm">
-              <span class="glyphicon glyphicon-star"></span> Star
+              <span class="fas fa-star"></span> Star
             </button>
             <!--{% if album.is_favorite %}
                                           <img height="20" width="20" src="https://cdn2.iconfinder.com/data/icons/crystalproject/crystal_project_256x256/apps/keditbookmarks.png"/>
                                           
                                           {% endif %}-->
             <button type="button" class="btn btn-default btn-sm">
-              <span class="glyphicon glyphicon-trash"></span> Trash
+              <span class="fas fa-trash"></span> Delete
             </button>
             <p></p>
           </div>
@@ -104,4 +82,6 @@
       </ul>
     </div>
   </div>
+</div>
 </body>
+{% endblock %}
