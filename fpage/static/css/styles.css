@@ -74,3 +74,9 @@ div.container{height: 100vh !important;}
   left: 50%; 
   transform: translatex(-50%); 
 } 
+.page-footer {
+  background-color: #101011; }
+
+.last-footer{
+  background-color: #6c6c72;
+}
