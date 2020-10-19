@@ -1,11 +1,10 @@
-{% extends "fpage/main.html" %}
+{% extends "fpage/base.html" %}
 {% block content %}
-<body>
 	<div class="container h-100">
 		<div class="d-flex justify-content-center h-100">
 			<div class="user_card">
 				<div class="d-flex justify-content-center">
-					<h3 id="form-title">REGISTER ACCOUNT</h3>
+					<h3 id="form-title">Register</h3>
 				</div>
 				<div class="d-flex justify-content-center form_container">
 
@@ -44,30 +43,18 @@
 
 					</form>
 				</div>
-
-				{{form.errors}}
-				
-				<div class="mt-4">
-					<div class="d-flex justify-content-center links" style="color:rgb(247, 241, 241)">
+				{% if form.errors %}
+					<div class="p-1 text-warning">
+						<h6> Errors </h6>
+						<p> {{form.errors}} </p>
+					</div>
+				{% endif %}
+				<div class="mt-1">
+					<div class="text-white text-center">
 						Already have an account? <a href="{% url 'fpage:login' %}" class="ml-2">Login</a>
 					</div>
 				</div>
 			</div>
 		</div>
 	</div>
-	<script>
-
-		//Query All input fields
-		var form_fields = document.getElementsByTagName('input')
-		form_fields[1].placeholder='Username..';
-		form_fields[2].placeholder='Email..';
-		form_fields[3].placeholder='Enter password...';
-		form_fields[4].placeholder='Re-enter Password...';
-
-
-		for (var field in form_fields){	
-			form_fields[field].className += ' form-control'
-		}
-	</script>
-</body>
 {% endblock %}
