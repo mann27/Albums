@@ -1,0 +1,33 @@
+{% extends "fpage/main.html" %}}
+{% block content %}
+<div id="background">
+<div class="card-body">
+    <h4>Album List</h4>
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">Title</th>
+                <th scope="col">Artist</th>
+                <th scope="col">Genre</th>
+                <th scope="col">Logo</th>
+                <th scope="col">Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for album in all_albums %}
+            <tr>
+                <td>{{ album.album_title }}</td>
+                <td>{{ album.artist }}</td>
+                <td>{{ album.genre }}</td>
+                <td>{{ album.album_logo_link }}</td>
+                <td><a type="button" class="btn btn-warning" href="">Update</a>
+                    <a type="button" class="btn btn-danger" href="">Delete</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <a type="button" class="btn btn-success" href="#">Create</a>
+</div>
+</div>
+{% endblock %}

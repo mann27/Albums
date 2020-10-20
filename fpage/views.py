@@ -96,8 +96,16 @@ def favorite(request, album_id):
         selected_song.save()
         return render(request, 'fpage/detail.html', {'album' : album})
 
+@login_required(login_url='fpage:login')
+def add_album(request):
+    all_albums = Album.objects.all()
+    context = {
+        'all_albums': all_albums,
+    }
+    return render(request, 'fpage/albumadd.html',context)
      
-     """def favAlbum(request, album_id):
+     
+    """def favAlbum(request, album_id):
     album=get_object_or_404(Album, id=album_id)
     try: 
         selected_album = album.album_set.get(title=request.POST['album']) 
@@ -112,7 +120,7 @@ def favorite(request, album_id):
         """
 
 
-     """ class BlogSearchListView(BlogListView):
+    """ class BlogSearchListView(BlogListView):
             
             paginate_by = 10
 
