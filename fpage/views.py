@@ -118,7 +118,7 @@ def albumCreate(request):
                 pass  
     else:  
         form = AlbumForm()  
-    return render(request,'fpage/album-create.html',{'form':form})   
+    return render(request,'fpage/forms.html',{'form':form})   
 
 @login_required(login_url='fpage:login') 
 def albumUpdate(request, id):  
@@ -133,7 +133,7 @@ def albumUpdate(request, id):
                 return redirect('fpage:index')
             except Exception as e: 
                 pass    
-    return render(request,'fpage/album-update.html',{'form':form})    
+    return render(request,'fpage/forms.html',{'form':form})    
 
 def albumDelete(request, id):
     album = Album.objects.get(id=id)
