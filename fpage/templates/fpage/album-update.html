@@ -1,0 +1,12 @@
+{% extends "fpage/base.html" %}
+{% block content %}
+<div class="card-body">
+    <h4>Update Album</h4>
+    <form method="post">
+        {% csrf_token %}
+        {{form.as_p}}
+        <a type="button" class="btn btn-danger" href="{%url 'fpage:album-list' %}">Cancel</a>
+        <button type="submit" class="btn btn-success">Update</button>
+    </form>
+</div>
+{% endblock %}

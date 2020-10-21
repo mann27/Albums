@@ -1,41 +1,32 @@
-{% extends "fpage/main.html" %}
+{% extends "fpage/base.html" %}
 {% block content %}
-<body>
+<div class="container pt-5">
+  <div class="row">
+    <ul class="d-flex w-100 justify-content-between" style="list-style-type: none">
+      {% for album in all_albums %}
+      <li>
+        <div class="col">
+          <img src="{{album.album_logo_link}}" height="200" width="150" />
+          <h2>{{ album.album_title }}</h2>
 
+          <a href="{% url 'music:detail' album.id %}" class="btn btn-info" role="button">Details</a>
 
-<!-- Album Card-->
-<div id="background">
-  <div class="container pt-5">
-    <div class="row">
-      <ul class="d-flex w-100 justify-content-between" style="list-style-type: none">
-        {% for album in all_albums %}
-        <li>
-          <div class="col">
-            <img src="{{album.album_logo_link}}" height="200" width="150" />
-            <h2>{{ album.album_title }}</h2>
+          <button type="button" class="btn btn-default btn-sm">
+            <span class="fas fa-star"></span> Star
+          </button>
+          {% if album.is_favorite %}
+          <img height="20" width="20"
+            src="https://cdn2.iconfinder.com/data/icons/crystalproject/crystal_project_256x256/apps/keditbookmarks.png" />
 
-            <a href="{% url 'music:detail' album.id %}" class="btn btn-info" role="button">Details</a>
+          {% endif %}
+          <a href="{%url 'fpage:album-delete' album.id  %}" class="btn btn-info" role="button">Delete</a>
+          <p></p>
+        </div>
+      </li>
 
-            <button type="button" class="btn btn-default btn-sm">
-              <span class="fas fa-star"></span> Star
-            </button>
-            <!--{% if album.is_favorite %}
-                                          <img height="20" width="20" src="https://cdn2.iconfinder.com/data/icons/crystalproject/crystal_project_256x256/apps/keditbookmarks.png"/>
-                                          
-                                          {% endif %}-->
-            <button type="button" class="btn btn-default btn-sm">
-              <span class="fas fa-trash"></span> Delete
-            </button>
-            <p></p>
-          </div>
-        </li>
-
-        {% endfor %}
-      </ul>
-    </div>
+      {% endfor %}
+    </ul>
   </div>
 </div>
-<!-- Album Card-->
-
-</body>
+<!-- Footer -->
 {% endblock %}

@@ -15,7 +15,10 @@ urlpatterns = [
 	path('login/', views.loginPage, name="login"),  
 	path('logout/', views.logoutUser, name="logout"),
     path('', views.index, name='index'),
-    path('add-album/', views.add_album, name="add-album"),
+    path('album-list/', views.albumlist, name="album-list"),
+    path('album-create/', views.albumCreate, name="album-create"),
+    path('album-update/<int:id>', views.albumUpdate, name='album-update'),
+    path('album-delete/<int:id>', views.albumDelete, name='album-delete'),
     # music/<album_id>/
     path('detail/<str:album_id>/', views.detail , name='detail'),
 
