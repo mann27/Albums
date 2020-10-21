@@ -1,6 +1,6 @@
 from django.shortcuts import get_object_or_404, render, redirect
 from django.template import loader
-from .forms import CreateUserForm
+from .forms import CreateUserForm,AlbumForm
 from .models import Album, Song
 from django.contrib import messages
 from django.contrib.auth.forms import UserCreationForm
@@ -96,8 +96,57 @@ def favorite(request, album_id):
         selected_song.save()
         return render(request, 'fpage/detail.html', {'album' : album})
 
-     
-     """def favAlbum(request, album_id):
+@login_required(login_url='fpage:login')
+def albumlist(request):
+    all_albums = Album.objects.all()
+    context = {
+        'all_albums': all_albums,
+    }
+    return render(request, 'fpage/albumadd.html',context)
+
+
+@login_required(login_url='fpage:login')
+def albumCreate(request):  
+    if request.method == "POST":  
+        form = AlbumForm(request.POST)  
+        if form.is_valid():  
+            try:  
+                form.save() 
+                model = form.instance
+                return redirect('fpage:index')  
+            except:  
+                pass  
+    else:  
+        form = AlbumForm()  
+    return render(request,'fpage/forms.html',{'form':form})   
+
+@login_required(login_url='fpage:login') 
+def albumUpdate(request, id):  
+    album = Album.objects.get(id=id)
+    form = AlbumForm(initial={'Title': album.album_title, 'Artist': album.artist, 'Genre': album.genre, 'Logo': album.album_logo_link})
+    if request.method == "POST":  
+        form = AlbumForm(request.POST, instance=album)  
+        if form.is_valid():  
+            try: 
+                form.save() 
+                model = form.instance
+                return redirect('fpage:index')
+            except Exception as e: 
+                pass    
+    return render(request,'fpage/forms.html',{'form':form})    
+
+def albumDelete(request, id):
+    album = Album.objects.get(id=id)
+    try:
+        album.delete()
+    except:
+        pass
+    return redirect('fpage:index')
+
+
+
+
+    """def favAlbum(request, album_id):
     album=get_object_or_404(Album, id=album_id)
     try: 
         selected_album = album.album_set.get(title=request.POST['album']) 
@@ -112,7 +161,7 @@ def favorite(request, album_id):
         """
 
 
-     """ class BlogSearchListView(BlogListView):
+    """ class BlogSearchListView(BlogListView):
             
             paginate_by = 10
 

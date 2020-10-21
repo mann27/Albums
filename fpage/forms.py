@@ -1,6 +1,7 @@
 from django.contrib.auth.forms import UserCreationForm
+from django.forms import ModelForm
 from django.contrib.auth.models import User
-
+from .models import Album
 
 class CreateUserForm(UserCreationForm):
     class Meta:
@@ -21,3 +22,8 @@ class CreateUserForm(UserCreationForm):
 		
         self.fields['password2'].widget.attrs['class'] = 'form-control'
         self.fields['password2'].widget.attrs['placeholder'] = 'Confirm Password'
+	
+class AlbumForm(ModelForm):
+	class Meta:
+		model = Album
+		fields = '__all__'
