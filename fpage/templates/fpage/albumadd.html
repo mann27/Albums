@@ -4,7 +4,7 @@
 <div class="card-body">
     <div class="d-flex justify-content-between ">
         <h4>Album List</h4>
-        <a type="button" class="btn btn-success line-add" href="{%url 'fpage:album-create' %}">Create</a>
+        <a type="button" class="btn btn-success line-add-album" href="{%url 'fpage:album-create' %}">Create</a>
     </div>
     <table class="table right">
         <thead>
@@ -12,7 +12,6 @@
                 <th scope="col">Title</th>
                 <th scope="col">Artist</th>
                 <th scope="col">Genre</th>
-                <th scope="col">Logo</th>
                 <th scope="col">Action</th>
             </tr>
         </thead>
@@ -22,7 +21,6 @@
                 <td>{{ album.album_title }}</td>
                 <td>{{ album.artist }}</td>
                 <td>{{ album.genre }}</td>
-                <td>{{ album.album_logo_link }}</td>
                 <td><a type="button" class="btn btn-warning" href="{%url 'fpage:album-update' album.id  %}">Update</a>
                     <a type="button" class="btn btn-danger" href="{%url 'fpage:album-delete' album.id  %}">Delete</a>
                 </td>

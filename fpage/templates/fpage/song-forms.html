@@ -1,11 +1,11 @@
 {% extends "fpage/base.html" %}
 {% block content %}
 <div class="card-body">
-    <h5>Album</h5>
+    <h5>Song</h5>
     <form method="post">
         {% csrf_token %}
         {{form.as_p}}
-        <a type="button" class="btn btn-danger" href="{%url 'fpage:album-list' %}">Cancel</a>
+        <a type="button" class="btn btn-danger" href="{%url 'fpage:song-list' %}">Cancel</a>
         <button type="submit" class="btn btn-success">Create</button>
     </form> 
 </div>

@@ -15,10 +15,19 @@ urlpatterns = [
 	path('login/', views.loginPage, name="login"),  
 	path('logout/', views.logoutUser, name="logout"),
     path('', views.index, name='index'),
+
+    # Album CRUD
     path('album-list/', views.albumlist, name="album-list"),
     path('album-create/', views.albumCreate, name="album-create"),
     path('album-update/<int:id>', views.albumUpdate, name='album-update'),
     path('album-delete/<int:id>', views.albumDelete, name='album-delete'),
+    
+    # Song CRUD
+    path('song-list/', views.songlist, name="song-list"),
+    path('song-create/', views.songCreate, name="song-create"),
+    path('song-update/<int:id>', views.songUpdate, name='song-update'),
+    path('song-delete/<int:id>', views.songDelete, name='song-delete'),
+    
     # music/<album_id>/
     path('detail/<str:album_id>/', views.detail , name='detail'),
 

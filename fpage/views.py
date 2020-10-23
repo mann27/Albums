@@ -1,6 +1,6 @@
 from django.shortcuts import get_object_or_404, render, redirect
 from django.template import loader
-from .forms import CreateUserForm,AlbumForm
+from .forms import CreateUserForm,AlbumForm,SongForm
 from .models import Album, Song
 from django.contrib import messages
 from django.contrib.auth.forms import UserCreationForm
@@ -67,6 +67,7 @@ def index(request):
     '''Index View for the fpage app. Home page of the app.
         To Show all the albums at avaiable in the DB.'''
     all_albums = Album.objects.all()
+    all_songs= Song.objects.all()
     template = loader.get_template('fpage/index.html')
     context = {
         'all_albums': all_albums,
@@ -143,7 +144,51 @@ def albumDelete(request, id):
         pass
     return redirect('fpage:index')
 
+@login_required(login_url='fpage:login')
+def songlist(request):
+    all_songs= Song.objects.all()
+    context = {
+        'all_songs': all_songs,
+    }
+    return render(request, 'fpage/songs.html',context)
 
+@login_required(login_url='fpage:login')
+def songCreate(request):  
+    if request.method == "POST":  
+        form = SongForm(request.POST)  
+        if form.is_valid():  
+            try:  
+                form.save() 
+                model = form.instance
+                return redirect('fpage:index')  
+            except:  
+                pass  
+    else:  
+        form = SongForm()  
+    return render(request,'fpage/song-forms.html',{'form':form})   
+
+@login_required(login_url='fpage:login') 
+def songUpdate(request, id):  
+    song = Song.objects.get(id=id)
+    form = SongForm(initial={'album': song.album, 'file type': song.file_type, 'song title': song.song_title, 'favorite': song.is_favorite})
+    if request.method == "POST":  
+        form = SongForm(request.POST, instance=song)  
+        if form.is_valid():  
+            try: 
+                form.save() 
+                model = form.instance
+                return redirect('fpage:song-list')
+            except Exception as e: 
+                pass    
+    return render(request,'fpage/song-forms.html',{'form':form})    
+
+def songDelete(request, id):
+    song = Song.objects.get(id=id)
+    try:
+        song.delete()
+    except:
+        pass
+    return redirect('fpage:index')
 
 
     """def favAlbum(request, album_id):

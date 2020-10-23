@@ -104,7 +104,10 @@ div.container {
   background-color: #6c6c72;
 }
 
-.line-add {
-  margin-right: 50px;
+.line-add-album {
+  margin-right: 580px;
 
+}
+.line-add-song{
+  margin-right: 385px;
 }
