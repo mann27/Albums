@@ -19,7 +19,3 @@ class Song(models.Model):
 
     def __str__ (self):
         return self.song_title 
-
-class favourite(models.Model):
-    #more fields
-    fav = models.ManyToManyField(Album, related_name='favAlbum')

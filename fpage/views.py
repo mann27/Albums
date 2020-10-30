@@ -6,6 +6,7 @@ from django.contrib import messages
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
+from django.http import JsonResponse
 
 
 # from django.db.models import Q
@@ -195,19 +196,29 @@ def songDelete(request, id):
 
 @login_required(login_url='fpage:login')
 def favAlbum(request):
-    if request.method == 'POST' and request.is_ajax():
-        album_id = request.POST['album_id']
-        album=get_object_or_404(Album, id=album_id)
-        _fav = album in album.fav.all()
-        if _fav :
-            album.fav.remove(user)
+    if request.method == 'GET' and request.is_ajax():
+
+         # use get method to access values in GET request 
+        album_id = request.GET.get('album_id', None)   
+        album = Album.objects.get(id=album_id)
+        if album:
+            _fav = album.is_favorite_album
+
+           # if album is already favorite
+            if _fav:
+                album.is_favorite_album = False
+            else:
+                album.is_favorite_album = True
+
+            # save album
+            album.save()
+            # success
+            return JsonResponse({}, status=200) 
         else:
-            album.fav.add(user)
-
-    return JsonResponse({'fav':_fav},status=200)
-
-
-
+            # album not found
+            return JsonResponse({}, status=404)   
+    # invalid request
+    return JsonResponse({}, status=400)
 
 
 @login_required(login_url='fpage:login')

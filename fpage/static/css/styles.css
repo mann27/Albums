@@ -111,3 +111,12 @@ div.container {
 .line-add-song{
   margin-right: 385px;
 }
+
+/* Favourite Button */
+.fas.fa-heart {
+  color: gray;  /* Favourite button should be dull gray to when album is not favourite */
+}
+
+.favorite {
+  color: red !important; /* if album is favorite */
+}

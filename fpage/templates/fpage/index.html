@@ -10,37 +10,16 @@
           <h2>{{ album.album_title }}</h2>
 
           <a href="{% url 'music:detail' album.id %}" class="btn btn-info" role="button">Details</a>
-          <a class="btn btn-info thumb" role="button">fav</a>
-          
+          <!-- Favourite-->
+          <!-- If Album favourite, render the button with favorite class -->
+          {% if album.is_favorite_album %}
+          <button class="btn btn-outline fas fa-heart favorite" data-bookmark-url="{% url 'fpage:fav-album' %}" data-album-id="{{ album.id }}" onclick='favouriteAlbum(this)' role="button"></button>
 
-          <script type="text/javascript"> 
-          $('.thumb').click(function () {
-            $.ajax({
-              
-                type: 'POST',
-                url: {% url 'fpage:fav-album' %},
-                data: {
-                    'album_id': {{ album_slug.id }},
-                    'csrfmiddlewaretoken': $('input[name=csrfmiddlewaretoken]').val(),
-                },
-                success: LikePost()
-            });
-            
-            function LikePost(data, jqXHR) {
-                var data = $.parseJSON(data)
-                if (data['fav']) {
-                    $('.thumb').removeClass("fas fa-thumbs-up").addClass('far fa-thumbs-up')
-                }
-                else
-                    {
-                        $('.thumb').removeClass("far fa-thumbs-up").addClass('fas fa-thumbs-up')
-                    }
-
-
-            }
-            console.log("button is clicked")
-        });
-      </script>
+          <!-- If Album favourite, render the button with favorite class -->
+          {% else %}
+          <button class="btn btn-outline fas fa-heart" data-bookmark-url="{% url 'fpage:fav-album' %}" data-album-id="{{ album.id }}" onclick='favouriteAlbum(this)' role="button"></button>
+          {% endif %}
+          <!-- Delete-->
           <a href="{%url 'fpage:album-delete' album.id  %}" class="btn btn-info" role="button">Delete</a>
           <p></p>
         </div>
@@ -50,5 +29,22 @@
     </ul>
   </div>
 </div>
-<!-- Footer -->
+<!-- JS FOR FAVOURITE FEATURE -->
+<script type="text/javascript">
+        
+  // this function is triggered by the clicking of favorite button
+  // `elem` is the button which triggered the function
+function favouriteAlbum(elem) {
+$.ajax({
+type: 'GET',
+url: $(elem).attr('data-bookmark-url'),    // url where request need to be sent
+data: {
+'album_id': $(elem).attr('data-album-id'),    // album id
+          },
+success: function() {
+$(elem).toggleClass('favorite');
+}
+      });
+  }
+</script>
 {% endblock %}
