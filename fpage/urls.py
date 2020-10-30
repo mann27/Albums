@@ -10,7 +10,7 @@ app_name = 'music'
 
 
 urlpatterns = [
-    #/music/
+    #Signup/Signin
     path('register/', views.registerPage, name="register"),
 	path('login/', views.loginPage, name="login"),  
 	path('logout/', views.logoutUser, name="logout"),
@@ -32,5 +32,10 @@ urlpatterns = [
     path('detail/<str:album_id>/', views.detail , name='detail'),
 
     # music/<album_id>/favorite
-    path('favorite/<str:album_id>/', views.favorite , name='favorite'),
+    path('fav-song/<str:album_id>/', views.favSong , name='fav-song'),
+    path('fav-album/', views.favAlbum , name='fav-album'),
+
+    # Favourite list
+    path('fav-song-list/', views.favSong_list , name='fav-song-list'),
+    path('fav-album-list/', views.favAlbum_list , name='fav-album-list'),
 ] 

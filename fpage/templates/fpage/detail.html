@@ -1,10 +1,10 @@
 {% extends 'fpage/base.html' %}
 {% block content %}
 <div class="container">
-    <img src="{{ album.album_logo }}">
+    <img src="{{ album.album_logo_link }}">
     <h1>{{ album.album_title }}</h1>
     <h2>{{ album.artist }}</h2>
-    <form action="{% url 'music:favorite' album.id %}" method="post">
+    <form action="{% url 'fpage:fav-song' album.id %}" method="post">
         {% csrf_token %}
         {% for song in album.song_set.all %}
         <input type="radio" id="song{{ forloop.counter }}" name="song" value="{{ song.id }}" />

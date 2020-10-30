@@ -1,0 +1,26 @@
+{% extends "fpage/base.html" %}}
+{% block content %}
+<div id="background">
+<div class="card-body">
+    <div class="d-flex justify-content-between ">
+        <h4>Your Favourite Albums</h4>
+    </div>
+    <table class="table right">
+        <thead>
+            <tr>
+                <th scope="col">Title</th>
+                <th scope="col">Artist</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for album in fav %}
+            <tr>
+                <td>{{ album.album_title }}</td>
+                <td>{{ album.artist }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+</div>
+{% endblock %}

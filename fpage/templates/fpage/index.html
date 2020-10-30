@@ -10,15 +10,37 @@
           <h2>{{ album.album_title }}</h2>
 
           <a href="{% url 'music:detail' album.id %}" class="btn btn-info" role="button">Details</a>
+          <a class="btn btn-info thumb" role="button">fav</a>
+          
 
-          <button type="button" class="btn btn-default btn-sm">
-            <span class="fas fa-star"></span> Star
-          </button>
-          {% if album.is_favorite %}
-          <img height="20" width="20"
-            src="https://cdn2.iconfinder.com/data/icons/crystalproject/crystal_project_256x256/apps/keditbookmarks.png" />
+          <script type="text/javascript"> 
+          $('.thumb').click(function () {
+            $.ajax({
+              
+                type: 'POST',
+                url: {% url 'fpage:fav-album' %},
+                data: {
+                    'album_id': {{ album_slug.id }},
+                    'csrfmiddlewaretoken': $('input[name=csrfmiddlewaretoken]').val(),
+                },
+                success: LikePost()
+            });
+            
+            function LikePost(data, jqXHR) {
+                var data = $.parseJSON(data)
+                if (data['fav']) {
+                    $('.thumb').removeClass("fas fa-thumbs-up").addClass('far fa-thumbs-up')
+                }
+                else
+                    {
+                        $('.thumb').removeClass("far fa-thumbs-up").addClass('fas fa-thumbs-up')
+                    }
 
-          {% endif %}
+
+            }
+            console.log("button is clicked")
+        });
+      </script>
           <a href="{%url 'fpage:album-delete' album.id  %}" class="btn btn-info" role="button">Delete</a>
           <p></p>
         </div>
