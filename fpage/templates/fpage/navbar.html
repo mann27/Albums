@@ -1,5 +1,3 @@
-<!--Navbar -->
-
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <a class="navbar-brand" href="#">Albums</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
@@ -15,41 +13,41 @@
                 </a>
             </li>
             <li class="mr-2 nav-item">
-                <a class="nav-link" href="{% url 'fpage:song-list' %}">
+                <a class="nav-link active " href="{% url 'fpage:song-list' %}">
                     <span class="fa fa-headphones"></span> Songs
                 </a>
             </li>
-            <li class="mr-2 nav-item">
+            <li class="mr-2 nav-item active">
                 <a class="nav-link" href="{% url 'fpage:album-list' %}">
                     <span class="fa fa-plus"></span> Add Albums
                 </a>
             </li>
             {% if request.user.is_authenticated %}
-            <li class="mr-2 nav-item dropdown">
+            <li class="mr-2 nav-item dropdown active">
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
                     aria-haspopup="true" aria-expanded="false">
                     {{ request.user }}
                 </a>
-                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item" href="{% url 'fpage:fav-album-list' %}">Favourite Albums</a>
+                <div class="dropdown-menu " aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item active" href="{% url 'fpage:fav-album-list' %}">Favourite Albums</a>
                     <a class="dropdown-item" href="{% url 'fpage:fav-song-list' %}">Favourite Songs</a>
                     <a class="dropdown-item" href="{% url 'fpage:logout' %}">Logout</a>
                 </div>
             </li>
             {% else %}
             <li class="mr-2 nav-item">
-                <a class="nav-link" href="{% url 'fpage:login' %}">Login</a>
+                <a class="nav-link active" href="{% url 'fpage:login' %}">Login</a>
             </li>
             <li class="mr-2 nav-item">
-                <a class="nav-link" href="{% url 'fpage:register' %}">Register</a>
+                <a class="nav-link  active" href="{% url 'fpage:register' %}">Register</a>
             </li>
             {% endif %}
         </ul>
+        {% if request.user.is_authenticated %}
         <form class="form-inline my-2 my-lg-0">
             <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
             <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
         </form>
+        {% endif %}
     </div>
 </nav>
-
-<!--/.Navbar -->
