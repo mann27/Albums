@@ -6,6 +6,7 @@ from django.contrib import messages
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
+from django.http import JsonResponse
 
 
 # from django.db.models import Q
@@ -82,7 +83,7 @@ def detail(request,album_id):
 
 
 @login_required(login_url='fpage:login')
-def favorite(request, album_id):
+def favSong(request, album_id):
 
      album = get_object_or_404(Album, id=album_id)
      try:
@@ -93,7 +94,10 @@ def favorite(request, album_id):
             'error_message' : "you did not select a valid song"})
         
      else:
-        selected_song.is_favorite =True
+        if selected_song.is_favorite:
+            selected_song.is_favorite = False
+        else:
+            selected_song.is_favorite = True
         selected_song.save()
         return render(request, 'fpage/detail.html', {'album' : album})
 
@@ -190,7 +194,43 @@ def songDelete(request, id):
         pass
     return redirect('fpage:index')
 
+@login_required(login_url='fpage:login')
+def favAlbum(request):
+    if request.method == 'GET' and request.is_ajax():
 
+         # use get method to access values in GET request 
+        album_id = request.GET.get('album_id', None)   
+        album = Album.objects.get(id=album_id)
+        if album:
+            _fav = album.is_favorite_album
+
+           # if album is already favorite
+            if _fav:
+                album.is_favorite_album = False
+            else:
+                album.is_favorite_album = True
+
+            # save album
+            album.save()
+            # success
+            return JsonResponse({}, status=200) 
+        else:
+            # album not found
+            return JsonResponse({}, status=404)   
+    # invalid request
+    return JsonResponse({}, status=400)
+
+
+@login_required(login_url='fpage:login')
+def favSong_list(request):
+    fav=Song.objects.filter(is_favorite=True)
+    return render(request, 'fpage/favourite_songs.html' , {'fav' : fav}) 
+
+@login_required(login_url='fpage:login')
+def favAlbum_list(request):
+    fav=Album.objects.filter(is_favorite_album=True)
+    return render(request, 'fpage/favourite_album.html' , {'fav' : fav})  
+    
     """def favAlbum(request, album_id):
     album=get_object_or_404(Album, id=album_id)
     try: 
@@ -204,8 +244,9 @@ def songDelete(request, id):
         selected_album.save()   
         return render(request, 'fpage/index.html' , {'all_albums' : album})
         """
-
-
+    
+    
+    
     """ class BlogSearchListView(BlogListView):
             
             paginate_by = 10

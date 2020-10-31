@@ -10,15 +10,16 @@
           <h2>{{ album.album_title }}</h2>
 
           <a href="{% url 'music:detail' album.id %}" class="btn btn-info" role="button">Details</a>
+          <!-- Favourite-->
+          <!-- If Album favourite, render the button with favorite class -->
+          {% if album.is_favorite_album %}
+          <button class="btn btn-outline fas fa-heart favorite" data-bookmark-url="{% url 'fpage:fav-album' %}" data-album-id="{{ album.id }}" onclick='favouriteAlbum(this)' role="button"></button>
 
-          <button type="button" class="btn btn-default btn-sm">
-            <span class="fas fa-star"></span> Star
-          </button>
-          {% if album.is_favorite %}
-          <img height="20" width="20"
-            src="https://cdn2.iconfinder.com/data/icons/crystalproject/crystal_project_256x256/apps/keditbookmarks.png" />
-
+          <!-- If Album favourite, render the button with favorite class -->
+          {% else %}
+          <button class="btn btn-outline fas fa-heart" data-bookmark-url="{% url 'fpage:fav-album' %}" data-album-id="{{ album.id }}" onclick='favouriteAlbum(this)' role="button"></button>
           {% endif %}
+          <!-- Delete-->
           <a href="{%url 'fpage:album-delete' album.id  %}" class="btn btn-info" role="button">Delete</a>
           <p></p>
         </div>
@@ -28,5 +29,22 @@
     </ul>
   </div>
 </div>
-<!-- Footer -->
+<!-- JS FOR FAVOURITE FEATURE -->
+<script type="text/javascript">
+        
+  // this function is triggered by the clicking of favorite button
+  // `elem` is the button which triggered the function
+function favouriteAlbum(elem) {
+$.ajax({
+type: 'GET',
+url: $(elem).attr('data-bookmark-url'),    // url where request need to be sent
+data: {
+'album_id': $(elem).attr('data-album-id'),    // album id
+          },
+success: function() {
+$(elem).toggleClass('favorite');
+}
+      });
+  }
+</script>
 {% endblock %}
