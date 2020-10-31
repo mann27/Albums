@@ -10,11 +10,13 @@ app_name = 'music'
 
 
 urlpatterns = [
+
+    path('',views.home,name='home'),
     #Signup/Signin
     path('register/', views.registerPage, name="register"),
 	path('login/', views.loginPage, name="login"),  
 	path('logout/', views.logoutUser, name="logout"),
-    path('', views.index, name='index'),
+    path('index/', views.index, name='index'),
 
     # Album CRUD
     path('album-list/', views.albumlist, name="album-list"),
