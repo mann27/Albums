@@ -1,106 +1,12 @@
-{% block content %}
+{% extends "fpage/base.html" %}
 {% load static %}
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <title>Albums</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- Latest compiled and minified CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-  
-    <!-- jQuery library -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-  
-    <!-- Popper JS -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-  
-    <!-- Latest compiled JavaScript -->
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-  
-    <!-- Fontawesome for bootstrap 4-->
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css"
-      integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
-  
-      <style>
-        .home{
-            background-color: #6666a3;
-          height: 50vh !important; 
-        }
-        .page-footer {
-  background-color: #101011;
-        }
-            .last-footer {
-            background-color: #6c6c72;
-        }
-            .card-color{
-            background-color: #1e1e1f;
-        }
-      </style>
-</head>
-
-
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <a class="navbar-brand" href="#">Albums</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-    </button>
-
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav mr-auto">
-            <li class="mr-2 nav-item active">
-                <a class="nav-link" href="{% url 'fpage:index' %}">
-                    <span class="fa fa-music"></span> Albums
-                </a>
-            </li>
-            <li class="mr-2 nav-item">
-                <a class="nav-link active " href="{% url 'fpage:song-list' %}">
-                    <span class="fa fa-headphones"></span> Songs
-                </a>
-            </li>
-            <li class="mr-2 nav-item active">
-                <a class="nav-link" href="{% url 'fpage:album-list' %}">
-                    <span class="fa fa-plus"></span> Add Albums
-                </a>
-            </li>
-            {% if request.user.is_authenticated %}
-            <li class="mr-2 nav-item dropdown active">
-                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
-                    aria-haspopup="true" aria-expanded="false">
-                    {{ request.user }}
-                </a>
-                <div class="dropdown-menu " aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item active" href="{% url 'fpage:fav-album-list' %}">Favourite Albums</a>
-                    <a class="dropdown-item" href="{% url 'fpage:fav-song-list' %}">Favourite Songs</a>
-                    <a class="dropdown-item" href="{% url 'fpage:logout' %}">Logout</a>
-                </div>
-            </li>
-            {% else %}
-            <li class="mr-2 nav-item">
-                <a class="nav-link active" href="{% url 'fpage:login' %}">Login</a>
-            </li>
-            <li class="mr-2 nav-item">
-                <a class="nav-link  active" href="{% url 'fpage:register' %}">Register</a>
-            </li>
-            {% endif %}
-        </ul>
-        {% if request.user.is_authenticated %}
-        <form class="form-inline my-2 my-lg-0">
-            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-        </form>
-        {% endif %}
-    </div>
-</nav>
-
+{% block content %}
 
 <body>
-
   <!-- Header -->
-  <header class="py-5 mb-5 home ">
-    <div class="container h-100">
-      <div class="row h-100 align-items-center">
+  <header class="py-5 mb-5 home">
+    <div class="container d-flex align-items-center home-container">
+      <div class="row">
         <div class="col-lg-12">
           <h1 class="display-4 text-white mt-5 mb-2">Albums</h1>
           <p class="lead mb-5 text-white-50 animated bounce">Want to remember a song or Album? Dont worry Albums got it covered......</p>
@@ -110,94 +16,78 @@
   </header>
 
   <!-- Page Content -->
-  <div class="container">
-
+  <div class=container>
     <div class="row">
       <div class="col-md-8 mb-5">
         <h2>Features</h2>
         <hr>
         <p>Albums provides user with many features such as adding songs and albums, favouriting songs and albums,listen later feature , keeping History of all your listened songs and many more!</p>
         <a class="btn btn-primary btn-lg" href="{% url 'fpage:register' %}">Register &raquo;</a>
-      </div>
-
-    </div>
-    <!-- /.row -->
-
-    <div class="card-deck">
-      <div class="card card-color text-white" style="width: 18rem;">
-        <img class="card-img-top" src="{% static 'images/Song.jpeg' %}" alt="Card image cap">
-        <div class="card-body">
-          <h5 class="card-title">Songs</h5>
-          <p class="card-text">Do you have a favorite song? or you found a song Interesting ?Dont worry save it with us and we will never let you forget it.</p>
-        </div>
-        <ul class="list-group list-group-flush">
-          <li class="list-group-item list-group-item bg-dark">Listen to the Songs you love</li>
-          <li class="list-group-item list-group-item bg-dark">Add,Delete or Modify Songs</li>
-          <li class="list-group-item list-group-item bg-dark">Add Songs to your Favourite List</li>
-        </ul>
-        <div class="card-body">
-          <a href="{% url 'fpage:login' %}" class="btn btn-info">Login</a>
-        </div>
-      </div>
-      
-      <div class="card card-color text-white" style="width: 18rem;">
-        <img class="card-img-top" src="{% static 'images/album.jpeg' %}" alt="Card image cap">
-        <div class="card-body">
-          <h5 class="card-title">Albums</h5>
-          <p class="card-text">Is it your birthday song album or aniversary or any album close to you keep it safe with us.</p>
-        </div>
-        <ul class="list-group list-group-flush">
-          <li class="list-group-item list-group-item bg-dark">Add,Delete or Modify ALbums</li>
-          <li class="list-group-item list-group-item bg-dark">Add Songs to your Albums</li>
-          <li class="list-group-item list-group-item bg-dark">Favourite you ALbum</li>
-        </ul>
-        <div class="card-body">
-            <a href="{% url 'fpage:login' %}" class="btn btn-info">Login</a>
-        </div>
-      </div>
-      <div class="card card-color text-white" style="width: 18rem;">
-        <img class="card-img-top" src="{% static 'images/listen.jpeg' %}" alt="Card image cap">
-        <div class="card-body">
-          <h5 class="card-title">Listen Later</h5>
-          <p class="card-text">Often people forget to hear a new song ALbums made it easy with a Listen Later feature to listen it when you have time.</p>
-        </div>
-        <ul class="list-group list-group-flush">
-          <li class="list-group-item list-group-item bg-dark">Add or Delete the song from Listen Later</li>
-          <li class="list-group-item list-group-item bg-dark">History feature available</li>
-          <li class="list-group-item list-group-item bg-dark">Your Data is safe with us</li>
-        </ul>
-        <div class="card-body">
-            <a href="{% url 'fpage:login' %}" class="btn btn-info">Login</a>
-        </div>
+      </hr>
       </div>
     </div>
-    <!-- /.row -->
+    <div class="row mb-5">
 
-  </div>
-  <!-- /.container -->
+        <div class="col">
+            <div class="card card-color text-white" style="width: 20rem;">
+		        <img class="card-img-top" src="{% static 'images/Song.jpeg' %}" alt="Card image cap">
+		        <div class="card-body">
+		          <h5 class="card-title">Albums</h5>
+		          <p class="card-text">Is it your birthday song album or aniversary or any album close to you keep it safe with us.</p>
+		        </div>
+		        <ul class="list-group list-group-flush">
+		          <li class="list-group-item list-group-item bg-dark">Add,Delete or Modify ALbums</li>
+		          <li class="list-group-item list-group-item bg-dark">Add Songs to your Albums</li>
+		          <li class="list-group-item list-group-item bg-dark">Favourite you ALbum</li>
+		        </ul>
+		        <div class="card-body">
+		            <a href="{% url 'fpage:login' %}" class="btn btn-info">Login</a>
+		        </div>
+      		</div>
+        </div>
 
+        <div class="col">
+            <div class="card card-color text-white" style="width: 20rem;">
+		        <img class="card-img-top" src="{% static 'images/album.jpeg' %}" alt="Card image cap">
+		        <div class="card-body">
+		          <h5 class="card-title">Albums</h5>
+		          <p class="card-text">Is it your birthday song album or aniversary or any album close to you keep it safe with us.</p>
+		        </div>
+		        <ul class="list-group list-group-flush">
+		          <li class="list-group-item list-group-item bg-dark">Add,Delete or Modify ALbums</li>
+		          <li class="list-group-item list-group-item bg-dark">Add Songs to your Albums</li>
+		          <li class="list-group-item list-group-item bg-dark">Favourite you ALbum</li>
+		        </ul>
+		        <div class="card-body">
+		            <a href="{% url 'fpage:login' %}" class="btn btn-info">Login</a>
+		        </div>
+      		</div>
+        </div>
+
+        <div class="col">
+            <div class="card card-color text-white" style="width: 20rem;">
+		        <img class="card-img-top" src="{% static 'images/listen.jpeg' %}" alt="Card image cap">
+		        <div class="card-body">
+		          <h5 class="card-title">Albums</h5>
+		          <p class="card-text">Is it your birthday song album or aniversary or any album close to you keep it safe with us.</p>
+		        </div>
+		        <ul class="list-group list-group-flush">
+		          <li class="list-group-item list-group-item bg-dark">Add,Delete or Modify ALbums</li>
+		          <li class="list-group-item list-group-item bg-dark">Add Songs to your Albums</li>
+		          <li class="list-group-item list-group-item bg-dark">Favourite you ALbum</li>
+		        </ul>
+		        <div class="card-body">
+		            <a href="{% url 'fpage:login' %}" class="btn btn-info">Login</a>
+		        </div>
+      		</div>
+        </div>
+    </div>
+</div>
   <!-- Bootstrap core JavaScript -->
   <script src="vendor/jquery/jquery.min.js"></script>
   <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
 </body>
-<footer class="page-footer text-center font-small pt-1 wow fadeIn">
 
-    <hr class="my-1">
-  
-    <!-- Social icons -->
-    <!-- Social icons -->
-  
-    <!--Copyright-->
-    <div class="footer-copyright py-3" style="color:rgb(247, 241, 241)">
-      To Make the project grow Contribute Here &nbsp&nbsp
-      <a href="https://github.com/mann27/Albums" target="_blank">
-        <i class="fab fa-github"> </i>
-      </a>
-    </div>
-    <!--/.Copyright-->
-  
-  </footer>
-</html>
 
 {% endblock %}

@@ -86,9 +86,9 @@ nav.nav.navbar-brand {
   background-color: #004643 !important;
 }
 
-div.container {
+ .index-container {
   height: 100vh !important;
-}
+} 
 
 .navbar-nav.navbar-center {
   position: absolute;
@@ -119,4 +119,17 @@ div.container {
 
 .favorite {
   color: red !important; /* if album is favorite */
+}
+
+.card-color{
+  background-color: #1e1e1f;
+}
+
+.home{
+  background-color: #6666a3;
+height: 50vh !important; 
+}
+
+.home-container{
+  height: 40vh !important;
 }
