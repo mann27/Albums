@@ -21,6 +21,9 @@ from django.http import JsonResponse
 #class DetailView(generic.DetailView):
   #  model = Album
    # template_name='fpage/detail.html'
+def home(request):
+    return render(request, 'fpage/home.html', context={})
+
 
 def registerPage(request):
     if request.user.is_authenticated:
@@ -61,7 +64,7 @@ def loginPage(request):
 
 def logoutUser(request):
 	logout(request)
-	return redirect('fpage:login')
+	return redirect('fpage:home')
 
 @login_required(login_url='fpage:login')
 def index(request):

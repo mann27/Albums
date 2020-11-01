@@ -1,0 +1,93 @@
+{% extends "fpage/base.html" %}
+{% load static %}
+{% block content %}
+
+<body>
+  <!-- Header -->
+  <header class="py-5 mb-5 home">
+    <div class="container d-flex align-items-center home-container">
+      <div class="row">
+        <div class="col-lg-12">
+          <h1 class="display-4 text-white mt-5 mb-2">Albums</h1>
+          <p class="lead mb-5 text-white-50 animated bounce">Want to remember a song or Album? Dont worry Albums got it covered......</p>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Page Content -->
+  <div class=container>
+    <div class="row">
+      <div class="col-md-8 mb-5">
+        <h2>Features</h2>
+        <hr>
+        <p>Albums provides user with many features such as adding songs and albums, favouriting songs and albums,listen later feature , keeping History of all your listened songs and many more!</p>
+        <a class="btn btn-primary btn-lg" href="{% url 'fpage:register' %}">Register &raquo;</a>
+      </hr>
+      </div>
+    </div>
+    <div class="row mb-5">
+
+        <div class="col">
+            <div class="card card-color text-white" style="width: 20rem;">
+		        <img class="card-img-top" src="{% static 'images/Song.jpeg' %}" alt="Card image cap">
+		        <div class="card-body">
+		          <h5 class="card-title">Albums</h5>
+		          <p class="card-text">Is it your birthday song album or aniversary or any album close to you keep it safe with us.</p>
+		        </div>
+		        <ul class="list-group list-group-flush">
+		          <li class="list-group-item list-group-item bg-dark">Add,Delete or Modify ALbums</li>
+		          <li class="list-group-item list-group-item bg-dark">Add Songs to your Albums</li>
+		          <li class="list-group-item list-group-item bg-dark">Favourite you ALbum</li>
+		        </ul>
+		        <div class="card-body">
+		            <a href="{% url 'fpage:login' %}" class="btn btn-info">Login</a>
+		        </div>
+      		</div>
+        </div>
+
+        <div class="col">
+            <div class="card card-color text-white" style="width: 20rem;">
+		        <img class="card-img-top" src="{% static 'images/album.jpeg' %}" alt="Card image cap">
+		        <div class="card-body">
+		          <h5 class="card-title">Albums</h5>
+		          <p class="card-text">Is it your birthday song album or aniversary or any album close to you keep it safe with us.</p>
+		        </div>
+		        <ul class="list-group list-group-flush">
+		          <li class="list-group-item list-group-item bg-dark">Add,Delete or Modify ALbums</li>
+		          <li class="list-group-item list-group-item bg-dark">Add Songs to your Albums</li>
+		          <li class="list-group-item list-group-item bg-dark">Favourite you ALbum</li>
+		        </ul>
+		        <div class="card-body">
+		            <a href="{% url 'fpage:login' %}" class="btn btn-info">Login</a>
+		        </div>
+      		</div>
+        </div>
+
+        <div class="col">
+            <div class="card card-color text-white" style="width: 20rem;">
+		        <img class="card-img-top" src="{% static 'images/listen.jpeg' %}" alt="Card image cap">
+		        <div class="card-body">
+		          <h5 class="card-title">Albums</h5>
+		          <p class="card-text">Is it your birthday song album or aniversary or any album close to you keep it safe with us.</p>
+		        </div>
+		        <ul class="list-group list-group-flush">
+		          <li class="list-group-item list-group-item bg-dark">Add,Delete or Modify ALbums</li>
+		          <li class="list-group-item list-group-item bg-dark">Add Songs to your Albums</li>
+		          <li class="list-group-item list-group-item bg-dark">Favourite you ALbum</li>
+		        </ul>
+		        <div class="card-body">
+		            <a href="{% url 'fpage:login' %}" class="btn btn-info">Login</a>
+		        </div>
+      		</div>
+        </div>
+    </div>
+</div>
+  <!-- Bootstrap core JavaScript -->
+  <script src="vendor/jquery/jquery.min.js"></script>
+  <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+</body>
+
+
+{% endblock %}
