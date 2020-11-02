@@ -16,6 +16,75 @@
   </header>
 
   <!-- Page Content -->
+  {% if request.user.is_authenticated %}
+  <div class=container>
+    <div class="row">
+      <div class="col-md-8 mb-5">
+        <h2>Features</h2>
+        <hr>
+        <p>Albums provides user with many features such as adding songs and albums, favouriting songs and albums,listen later feature , keeping History of all your listened songs and many more!</p>
+        <a class="btn btn-primary btn-lg" href="{% url 'fpage:index' %}">Explore &raquo;</a>
+      </hr>
+      </div>
+    </div>
+    <div class="row mb-5">
+
+        <div class="col">
+            <div class="card card-color text-white" style="width: 20rem;">
+		        <img class="card-img-top" src="{% static 'images/Song.jpeg' %}" alt="Card image cap">
+		        <div class="card-body">
+		          <h5 class="card-title">Songs</h5>
+		          <p class="card-text">Do you have a favorite song? or you found a song Interesting ?Dont worry save it with us and we will never let you forget it</p>
+		        </div>
+		        <ul class="list-group list-group-flush">
+		          <li class="list-group-item list-group-item bg-dark">Listen to the Songs you love</li>
+		          <li class="list-group-item list-group-item bg-dark">Add,Delete or Modify Songs</li>
+		          <li class="list-group-item list-group-item bg-dark">Add Songs to your Favourite List</li>
+		        </ul>
+		        <div class="card-body">
+		            <a href="{% url 'fpage:song-list' %}" class="btn btn-info">View Songs</a>
+		        </div>
+      		</div>
+        </div>
+
+        <div class="col">
+            <div class="card card-color text-white" style="width: 20rem;">
+		        <img class="card-img-top" src="{% static 'images/album.jpeg' %}" alt="Card image cap">
+		        <div class="card-body">
+		          <h5 class="card-title">Albums</h5>
+		          <p class="card-text">Is it your birthday song album or aniversary or any album close to you keep it safe with us and listen to it whenever you like.</p>
+		        </div>
+		        <ul class="list-group list-group-flush">
+		          <li class="list-group-item list-group-item bg-dark">Add,Delete or Modify ALbums</li>
+		          <li class="list-group-item list-group-item bg-dark">Add Songs to your Albums</li>
+		          <li class="list-group-item list-group-item bg-dark">Favourite you ALbum</li>
+		        </ul>
+		        <div class="card-body">
+		            <a href="{% url 'fpage:album-list' %}" class="btn btn-info">View Albums</a>
+		        </div>
+      		</div>
+        </div>
+
+        <div class="col">
+            <div class="card card-color text-white" style="width: 20rem;">
+		        <img class="card-img-top" src="{% static 'images/listen.jpeg' %}" alt="Card image cap">
+		        <div class="card-body">
+		          <h5 class="card-title">Listen Later</h5>
+		          <p class="card-text">Often people forget to hear a new song ALbums made it easy with a Listen Later feature to listen it when you have time.</p>
+		        </div>
+		        <ul class="list-group list-group-flush">
+		          <li class="list-group-item list-group-item bg-dark">Add or Delete  from Listen Later</li>
+		          <li class="list-group-item list-group-item bg-dark">History feature available</li>
+		          <li class="list-group-item list-group-item bg-dark">Your Data is safe with us</li>
+		        </ul>
+		        <div class="card-body">
+		            <a href="{% url 'fpage:login' %}" class="btn btn-info">Watch Later</a>
+		        </div>
+      		</div>
+        </div>
+    </div>
+</div>
+{% else %}
   <div class=container>
     <div class="row">
       <div class="col-md-8 mb-5">
@@ -32,13 +101,13 @@
             <div class="card card-color text-white" style="width: 20rem;">
 		        <img class="card-img-top" src="{% static 'images/Song.jpeg' %}" alt="Card image cap">
 		        <div class="card-body">
-		          <h5 class="card-title">Albums</h5>
-		          <p class="card-text">Is it your birthday song album or aniversary or any album close to you keep it safe with us.</p>
+		          <h5 class="card-title">Songs</h5>
+		          <p class="card-text">Do you have a favorite song? or you found a song Interesting ?Dont worry save it with us and we will never let you forget it</p>
 		        </div>
 		        <ul class="list-group list-group-flush">
-		          <li class="list-group-item list-group-item bg-dark">Add,Delete or Modify ALbums</li>
-		          <li class="list-group-item list-group-item bg-dark">Add Songs to your Albums</li>
-		          <li class="list-group-item list-group-item bg-dark">Favourite you ALbum</li>
+		          <li class="list-group-item list-group-item bg-dark">Listen to the Songs you love</li>
+		          <li class="list-group-item list-group-item bg-dark">Add,Delete or Modify Songs</li>
+		          <li class="list-group-item list-group-item bg-dark">Add Songs to your Favourite List</li>
 		        </ul>
 		        <div class="card-body">
 		            <a href="{% url 'fpage:login' %}" class="btn btn-info">Login</a>
@@ -51,7 +120,7 @@
 		        <img class="card-img-top" src="{% static 'images/album.jpeg' %}" alt="Card image cap">
 		        <div class="card-body">
 		          <h5 class="card-title">Albums</h5>
-		          <p class="card-text">Is it your birthday song album or aniversary or any album close to you keep it safe with us.</p>
+		          <p class="card-text">Is it your birthday song album or aniversary or any album close to you keep it safe with us and listen to it whenever you like.</p>
 		        </div>
 		        <ul class="list-group list-group-flush">
 		          <li class="list-group-item list-group-item bg-dark">Add,Delete or Modify ALbums</li>
@@ -68,13 +137,13 @@
             <div class="card card-color text-white" style="width: 20rem;">
 		        <img class="card-img-top" src="{% static 'images/listen.jpeg' %}" alt="Card image cap">
 		        <div class="card-body">
-		          <h5 class="card-title">Albums</h5>
-		          <p class="card-text">Is it your birthday song album or aniversary or any album close to you keep it safe with us.</p>
+		          <h5 class="card-title">Listen Later</h5>
+		          <p class="card-text">Often people forget to hear a new song ALbums made it easy with a Listen Later feature to listen it when you have time.</p>
 		        </div>
 		        <ul class="list-group list-group-flush">
-		          <li class="list-group-item list-group-item bg-dark">Add,Delete or Modify ALbums</li>
-		          <li class="list-group-item list-group-item bg-dark">Add Songs to your Albums</li>
-		          <li class="list-group-item list-group-item bg-dark">Favourite you ALbum</li>
+		          <li class="list-group-item list-group-item bg-dark">Add or Delete  from Listen Later</li>
+		          <li class="list-group-item list-group-item bg-dark">History feature available</li>
+		          <li class="list-group-item list-group-item bg-dark">Your Data is safe with us</li>
 		        </ul>
 		        <div class="card-body">
 		            <a href="{% url 'fpage:login' %}" class="btn btn-info">Login</a>
@@ -83,6 +152,7 @@
         </div>
     </div>
 </div>
+{% endif %}
   <!-- Bootstrap core JavaScript -->
   <script src="vendor/jquery/jquery.min.js"></script>
   <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
