@@ -70,8 +70,9 @@ def logoutUser(request):
 def index(request):
     '''Index View for the fpage app. Home page of the app.
         To Show all the albums at avaiable in the DB.'''
-    all_albums = Album.objects.all()
-    all_songs= Song.objects.all()
+    user=request.user
+    all_albums = Album.objects.filter(user=user)
+    all_songs= Song.objects.filter(user=user)
     template = loader.get_template('fpage/index.html')
     context = {
         'all_albums': all_albums,
@@ -106,7 +107,8 @@ def favSong(request, album_id):
 
 @login_required(login_url='fpage:login')
 def albumlist(request):
-    all_albums = Album.objects.all()
+    user=request.user
+    all_albums = Album.objects.filter(user=user)
     context = {
         'all_albums': all_albums,
     }
@@ -116,11 +118,12 @@ def albumlist(request):
 @login_required(login_url='fpage:login')
 def albumCreate(request):  
     if request.method == "POST":  
-        form = AlbumForm(request.POST)  
+        form = AlbumForm(request.POST)
         if form.is_valid():  
             try:  
-                form.save() 
-                model = form.instance
+                fs=form.save(commit=False)
+                fs.user=request.user
+                fs.save()
                 return redirect('fpage:index')  
             except:  
                 pass  
@@ -129,7 +132,7 @@ def albumCreate(request):
     return render(request,'fpage/forms.html',{'form':form})   
 
 @login_required(login_url='fpage:login') 
-def albumUpdate(request, id):  
+def albumUpdate(request, id): 
     album = Album.objects.get(id=id)
     form = AlbumForm(initial={'Title': album.album_title, 'Artist': album.artist, 'Genre': album.genre, 'Logo': album.album_logo_link})
     if request.method == "POST":  
@@ -153,31 +156,33 @@ def albumDelete(request, id):
 
 @login_required(login_url='fpage:login')
 def songlist(request):
-    all_songs= Song.objects.all()
+    user=request.user
+    all_songs= Song.objects.filter(user=user)
     context = {
         'all_songs': all_songs,
     }
     return render(request, 'fpage/songs.html',context)
 
 @login_required(login_url='fpage:login')
-def songCreate(request):  
-    if request.method == "POST":  
-        form = SongForm(request.POST)  
+def songCreate(request): 
+    if request.method == "POST":
+        form = SongForm(request.user,request.POST) 
         if form.is_valid():  
             try:  
-                form.save() 
-                model = form.instance
+                fs=form.save(commit=False) 
+                fs.user=request.user
+                fs.save()
                 return redirect('fpage:index')  
             except:  
                 pass  
     else:  
-        form = SongForm()  
+        form = SongForm(user=request.user)  
     return render(request,'fpage/song-forms.html',{'form':form})   
 
 @login_required(login_url='fpage:login') 
 def songUpdate(request, id):  
     song = Song.objects.get(id=id)
-    form = SongForm(initial={'album': song.album, 'file type': song.file_type, 'song title': song.song_title, 'favorite': song.is_favorite})
+    form = SongForm(request.user,initial={'album': song.album, 'file type': song.file_type, 'song title': song.song_title, 'favorite': song.is_favorite})
     if request.method == "POST":  
         form = SongForm(request.POST, instance=song)  
         if form.is_valid():  
@@ -226,12 +231,14 @@ def favAlbum(request):
 
 @login_required(login_url='fpage:login')
 def favSong_list(request):
-    fav=Song.objects.filter(is_favorite=True)
+    user=request.user
+    fav=Song.objects.filter(is_favorite=True,user=user)
     return render(request, 'fpage/favourite_songs.html' , {'fav' : fav}) 
 
 @login_required(login_url='fpage:login')
 def favAlbum_list(request):
-    fav=Album.objects.filter(is_favorite_album=True)
+    user=request.user
+    fav=Album.objects.filter(is_favorite_album=True,user=user)
     return render(request, 'fpage/favourite_album.html' , {'fav' : fav})  
     
     """def favAlbum(request, album_id):

@@ -24,12 +24,17 @@ class CreateUserForm(UserCreationForm):
         self.fields['password2'].widget.attrs['placeholder'] = 'Confirm Password'
 	
 class AlbumForm(ModelForm):
-	class Meta:
-		model = Album
-		fields = '__all__'
+    class Meta:
+        model = Album
+        fields = ('artist', 'album_title', 'genre', 'album_logo_link','is_favorite_album')
 
 
 class SongForm(ModelForm):
-	class Meta:
-		model = Song
-		fields = '__all__'
+    class Meta:
+        model = Song
+        fields = ('album', 'file_type', 'song_title', 'is_favorite')
+    
+    def __init__(self, user=None,*args, **kwargs):
+        super(SongForm, self).__init__(*args,**kwargs)
+        if user:
+            self.fields['album'].queryset = Album.objects.filter(user=user)
