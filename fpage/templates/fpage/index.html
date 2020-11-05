@@ -9,7 +9,7 @@
           <img src="{{album.album_logo_link}}" height="200" width="150" />
           <h2>{{ album.album_title }}</h2>
 
-          <a href="{% url 'music:detail' album.id %}" class="btn btn-info" role="button">Details</a>
+          <a href="{% url 'fpage:detail' album.id %}" class="btn btn-info" role="button">Details</a>
           <!-- Favourite-->
           <!-- If Album favourite, render the button with favorite class -->
           {% if album.is_favorite_album %}
@@ -20,10 +20,35 @@
           <button class="btn btn-outline fas fa-heart" data-bookmark-url="{% url 'fpage:fav-album' %}" data-album-id="{{ album.id }}" onclick='favouriteAlbum(this)' role="button"></button>
           {% endif %}
           <!-- Delete-->
-          <a href="{%url 'fpage:album-delete' album.id  %}" class="btn btn-info" role="button">Delete</a>
+          {% comment %} <a href="{% url 'fpage:album-delete' album.id %}" class="btn btn-info" role="button">Delete</a> {% endcomment %}
+          <a class="btn btn-danger" role="button" data-bookmark-url="{% url 'fpage:index' %}" data-album-id="{{ album.id }}"  onclick='remove()'>Delete</a> 
           <p></p>
         </div>
       </li>
+
+      
+       <!--Modal-->
+        <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Delete</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                Are you sure you want to Delete?
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+                <a class="btn btn-primary" href="{%url 'fpage:album-delete' album.id  %}">Confirm</a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!--Modal--> 
+
 
       {% endfor %}
     </ul>

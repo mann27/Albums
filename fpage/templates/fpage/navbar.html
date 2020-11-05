@@ -31,7 +31,7 @@
                 <div class="dropdown-menu " aria-labelledby="navbarDropdown">
                     <a class="dropdown-item active" href="{% url 'fpage:fav-album-list' %}">Favourite Albums</a>
                     <a class="dropdown-item" href="{% url 'fpage:fav-song-list' %}">Favourite Songs</a>
-                    <a class="dropdown-item" href="{% url 'fpage:logout' %}">Logout</a>
+                    <a class="dropdown-item" onclick="logout()">Logout</a>
                 </div>
             </li>
             {% else %}
