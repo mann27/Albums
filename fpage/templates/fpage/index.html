@@ -21,13 +21,16 @@
           {% endif %}
           <!-- Delete-->
           {% comment %} <a href="{% url 'fpage:album-delete' album.id %}" class="btn btn-info" role="button">Delete</a> {% endcomment %}
-          <a class="btn btn-danger" role="button" data-bookmark-url="{% url 'fpage:index' %}" data-album-id="{{ album.id }}"  onclick='remove()'>Delete</a> 
+          <button type="button" class="btn btn-danger deleteModalBtn" data-album-id="{{ album.id }}" data-toggle="modal" data-target="#deleteModal"> Delete</button>
           <p></p>
         </div>
       </li>
 
-      
-       <!--Modal-->
+
+
+      {% endfor %}
+    </ul>
+    <!--Modal-->
         <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
           <div class="modal-dialog" role="document">
             <div class="modal-content">
@@ -42,21 +45,28 @@
               </div>
               <div class="modal-footer">
                 <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
-                <a class="btn btn-primary" href="{%url 'fpage:album-delete' album.id  %}">Confirm</a>
+                <a class="btn btn-primary">Confirm</a>
               </div>
             </div>
           </div>
         </div>
         <!--Modal--> 
-
-
-      {% endfor %}
-    </ul>
   </div>
 </div>
 <!-- JS FOR FAVOURITE FEATURE -->
 <script type="text/javascript">
-        
+
+$(document).on('click', '.deleteModalBtn', function() {
+
+   // access the album id using data attribute
+    var albumID = $(this).data('album-id');
+
+    // generating the url for the album. Here the initial value of id is dummy which will be replaced each time the modal is called
+    var deleteUrl = "{% url 'fpage:album-delete' id=12345 %}".replace(/12345/, albumID.toString());
+
+    // add the dynamic href value to the modal's delete button
+    $('.deleteAlbumBtn').attr('href', deleteUrl);
+  })
   // this function is triggered by the clicking of favorite button
   // `elem` is the button which triggered the function
 function favouriteAlbum(elem) {
