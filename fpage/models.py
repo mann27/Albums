@@ -22,3 +22,12 @@ class Song(models.Model):
 
     def __str__ (self):
         return self.song_title 
+
+class UserProfile(models.Model):
+    user = models.ForeignKey(User,on_delete=models.CASCADE)
+    first_name=models.CharField(max_length=50)
+    last_name=models.CharField(max_length=50)
+    email=models.CharField(max_length=150)
+    phone_num=models.IntegerField()
+    fav_genre=models.CharField(max_length=50)
+    profile_image = models.ImageField(default='profile.jpeg',null=True, blank=True)

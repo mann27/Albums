@@ -1,7 +1,7 @@
 from django.contrib.auth.forms import UserCreationForm
 from django.forms import ModelForm
 from django.contrib.auth.models import User
-from .models import Album,Song
+from .models import Album,Song,UserProfile
 
 class CreateUserForm(UserCreationForm):
     class Meta:
@@ -38,3 +38,8 @@ class SongForm(ModelForm):
         super(SongForm, self).__init__(*args,**kwargs)
         if user:
             self.fields['album'].queryset = Album.objects.filter(user=user)
+
+class ProfileForm(ModelForm):
+    class Meta:
+        model=UserProfile
+        fields = ('first_name','last_name','email','phone_num','fav_genre','profile_image')

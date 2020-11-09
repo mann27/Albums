@@ -1,0 +1,100 @@
+{% extends 'fpage/base.html' %}
+{% load static %}
+{% block content %}
+
+{% if all_info|length %}
+    <div class="profile-container">
+
+        <!-- Page Heading -->
+        <div class="d-sm-flex align-items-center justify-content-between mb-4 mt-4">
+        <h1 class="h3 mb-0 text-gray-800 line-add-profilebio">Profile</h1>
+        </div>          
+
+        {% comment %} {% if messages %}
+          {% for message in messages %}
+          <div class="alert alert-{{ message.tags }}" role="alert">{{ message }}</div>
+          {% endfor %}
+        {% endif %} {% endcomment %}
+
+        <!-- Main Content Here -->
+        {% for profile in all_info %}
+        <div class="row">
+          <div class="col-lg-2"></div>
+          <div class="col-lg-3 my-5">
+            <img src="{% static 'images/profile.jpeg' %}" class="rounded float-right" height="300px" width="300px">
+          </div>
+          <div class="card o-hidden border-0 shadow-lg my-5 col-lg-5">
+            <div class="card-body profile-font">
+                <h2>{{profile.first_name}} {{profile.last_name}}</h2>
+                <table>
+                    <tr>
+                        <th>Username:</th>
+                        <td> {{user.username}} </td>
+                    </tr>
+                    <tr>
+                        <th>Email:</th>
+                        <td> {{profile.email}} </td>
+                    </tr>
+                    <tr>
+                        <th>Fav Genre:</th>
+                        <td>{{profile.fav_genre}}</td>
+                    </tr>
+                    <tr>
+                        <th>Phone Number:</th>
+                        <td> {{profile.phone_num}} </td>
+                    </tr>
+                </table>
+                <a href="{% url 'fpage:profile-update' %}" class="btn btn-sm btn-primary shadow-sm">Update Profile</a>
+            </div>
+          </div>
+        </div>
+        {% endfor %}
+
+
+    </div>
+{% else %}
+<div class="profile-container">
+
+        <!-- Page Heading -->
+        <div class="d-sm-flex align-items-center justify-content-between mb-4 mt-4">
+        <h1 class="h3 mb-0 text-gray-800 line-add-profilebio">Profile</h1>
+            <i class="fa fa-pencil" aria-hidden="true"></i>
+        <a type="button" class="btn btn-success line-add-profile" href="{%url 'fpage:profile-create' %}">Add</a>
+        </div>          
+
+
+        <!-- Main Content Here -->
+        <div class="row">
+          <div class="col-lg-2"></div>
+          <div class="col-lg-3 my-5">
+            <img src="{% static 'images/profile.jpeg' %}" class="rounded float-right" height="300px" width="300px">
+          </div>
+          <div class="card o-hidden border-0 shadow-lg my-5 col-lg-5">
+            <div class="card-body profile-font">
+                <h2>{{profile.first_name}} {{profile.last_name}}</h2>
+                <table>
+                    <tr>
+                        <th>Username:</th>
+                        <td> {{user.username}} </td>
+                    </tr>
+                    <tr>
+                        <th>Email:</th>
+                        <td> </td>
+                    </tr>
+                    <tr>
+                        <th>Favourite Genre:</th>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <th>Phone Number:</th>
+                        <td> </td>
+                    </tr>
+                </table>
+            </div>
+          </div>
+        </div>
+
+
+    </div>
+{% endif %}
+{% endblock content %}

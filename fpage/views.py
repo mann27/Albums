@@ -1,7 +1,7 @@
 from django.shortcuts import get_object_or_404, render, redirect
 from django.template import loader
-from .forms import CreateUserForm,AlbumForm,SongForm
-from .models import Album, Song
+from .forms import CreateUserForm,AlbumForm,SongForm,ProfileForm
+from .models import Album, Song, UserProfile
 from django.contrib import messages
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import authenticate, login, logout
@@ -67,12 +67,50 @@ def logoutUser(request):
 	return redirect('fpage:home')
 
 @login_required(login_url='fpage:login')
+def profileView(request):
+    all_info=UserProfile.objects.filter(user=request.user)
+    context={
+        'all_info':all_info,
+    }
+    return render(request,'fpage/profile.html',context)
+
+@login_required(login_url='fpage:login') 
+def profileUpdate(request): 
+    profile= get_object_or_404(UserProfile, user=request.user)
+    form = ProfileForm(initial={'firstname': profile.first_name , 'lastname': profile.last_name, 'email': profile.email, 'phone_num': profile.phone_num, 'fav_genre':profile.fav_genre , 'profile_image':profile.profile_image})
+    if request.method == "POST":  
+        form = ProfileForm(request.POST, instance=profile)  
+        if form.is_valid():  
+            try: 
+                form.save() 
+                model = form.instance
+                return redirect('fpage:profile')
+            except Exception as e: 
+                pass    
+    return render(request,'fpage/profile_update.html',{'form':form})
+
+@login_required(login_url='fpage:login')
+def profileCreate(request):
+    if request.method == "POST":  
+            form = ProfileForm(request.POST)
+            if form.is_valid():  
+                try:  
+                    fs=form.save(commit=False)
+                    fs.user=request.user
+                    fs.save()
+                    return redirect('fpage:profile')  
+                except:  
+                    pass  
+    else:  
+        form = ProfileForm()
+    return render(request,'fpage/forms.html',{'form':form})
+
+@login_required(login_url='fpage:login')
 def index(request):
     '''Index View for the fpage app. Home page of the app.
         To Show all the albums at avaiable in the DB.'''
     user=request.user
     all_albums = Album.objects.filter(user=user)
-    all_songs= Song.objects.filter(user=user)
     template = loader.get_template('fpage/index.html')
     context = {
         'all_albums': all_albums,
