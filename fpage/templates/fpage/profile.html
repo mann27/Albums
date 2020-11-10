@@ -5,16 +5,29 @@
 {% if all_info|length %}
     <div class="profile-container">
 
+    <!--Error Messages -->
+    {% if form.errors %}
+       {% for field in form %}
+           {% for error in field.errors %} 
+              <div class="alert alert-danger">
+                   <strong>{{ error|escape }}</strong>
+              </div>
+           {% endfor %}
+       {% endfor %}
+    {% endif %} 
+
+    <!--Messages -->
+    {% if messages %}
+        {% for message in messages %}
+            <div class="alert alert-{{ message.tags }} alert-dismissible" role="alert">
+            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>{{ message }}</div>
+        {% endfor %}
+    {% endif %} 
+
         <!-- Page Heading -->
         <div class="d-sm-flex align-items-center justify-content-between mb-4 mt-4">
         <h1 class="h3 mb-0 text-gray-800 line-add-profilebio">Profile</h1>
         </div>          
-
-        {% comment %} {% if messages %}
-          {% for message in messages %}
-          <div class="alert alert-{{ message.tags }}" role="alert">{{ message }}</div>
-          {% endfor %}
-        {% endif %} {% endcomment %}
 
         <!-- Main Content Here -->
         {% for profile in all_info %}

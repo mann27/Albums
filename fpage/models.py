@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+from phonenumber_field.modelfields import PhoneNumberField
 
 # Create your models here.
 class Album(models.Model):
@@ -24,10 +25,10 @@ class Song(models.Model):
         return self.song_title 
 
 class UserProfile(models.Model):
-    user = models.ForeignKey(User,on_delete=models.CASCADE)
+    user = models.OneToOneField(User,on_delete=models.CASCADE)
     first_name=models.CharField(max_length=50)
     last_name=models.CharField(max_length=50)
     email=models.CharField(max_length=150)
-    phone_num=models.IntegerField()
+    phone_num=PhoneNumberField(null=False, blank=False, unique=True)
     fav_genre=models.CharField(max_length=50)
     profile_image = models.ImageField(default='profile.jpeg',null=True, blank=True)

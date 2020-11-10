@@ -85,8 +85,9 @@ def profileUpdate(request):
                 form.save() 
                 model = form.instance
                 return redirect('fpage:profile')
-            except Exception as e: 
-                pass    
+            except: 
+                messages.error(request, "Error. Profile was not updated")
+    messages.success(request, "Profile Updated!" )
     return render(request,'fpage/profile_update.html',{'form':form})
 
 @login_required(login_url='fpage:login')
@@ -100,9 +101,10 @@ def profileCreate(request):
                     fs.save()
                     return redirect('fpage:profile')  
                 except:  
-                    pass  
+                    messages.error(request, "Error. Profile was not created")  
     else:  
         form = ProfileForm()
+    messages.success(request, "Profile Created!" )
     return render(request,'fpage/forms.html',{'form':form})
 
 @login_required(login_url='fpage:login')
