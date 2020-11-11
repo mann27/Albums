@@ -12,6 +12,9 @@ app_name = 'music'
 urlpatterns = [
 
     path('',views.home,name='home'),
+    path('profile/',views.profileView,name='profile'),
+    path('profile-update/',views.profileUpdate,name='profile-update'),
+    path('profile-create/',views.profileCreate,name='profile-create'),
     #Signup/Signin
     path('register/', views.registerPage, name="register"),
 	path('login/', views.loginPage, name="login"),  

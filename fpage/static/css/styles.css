@@ -133,3 +133,21 @@ height: 50vh !important;
 .home-container{
   height: 40vh !important;
 }
+
+.profile-container{
+  height: 90vh !important;
+}
+.line-add-profile {
+  margin-right: 300px;
+
+}
+ 
+.profile-font{
+  font-family: 'Nanum Pen Script', cursive;
+  font-size: 28px;
+}
+
+.line-add-profilebio {
+  margin-left: 300px;
+
+}
