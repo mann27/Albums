@@ -29,6 +29,6 @@ class UserProfile(models.Model):
     first_name=models.CharField(max_length=50)
     last_name=models.CharField(max_length=50)
     email=models.CharField(max_length=150)
-    phone_num=PhoneNumberField(null=False, blank=False, unique=True)
+    phone_num=PhoneNumberField(null=True, blank=True, unique=True)
     fav_genre=models.CharField(max_length=50)
     profile_image = models.ImageField(default='profile.jpeg',null=True, blank=True)
