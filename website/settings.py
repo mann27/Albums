@@ -27,7 +27,6 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
-
 # Application definition
 SETTINGS_PATH = os.path.dirname(os.path.dirname(__file__))
 INSTALLED_APPS = [
@@ -121,3 +120,16 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
+
+#SMPT Configuration
+# EMAIL_USE_TLS = True
+# DEFAULT_FROM_EMAIL = ''
+# SERVER_EMAIL = ''
+# EMAIL_HOST = 'smtp.gmail.com'
+# EMAIL_PORT = 587
+# EMAIL_HOST_USER = ''
+# EMAIL_HOST_PASSWORD = ''
+# EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+
+#For Development
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
