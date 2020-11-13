@@ -2,33 +2,36 @@
 {% block content %}
 <div class="index-container pt-5">
   <div class="row">
-    <ul class="d-flex w-100 justify-content-between" style="list-style-type: none">
+    <ul class="d-flex w-100 flex-wrap justify-content-center" style="list-style-type: none">
       {% for album in all_albums %}
       <li>
-        <div class="col">
-          <img src="{{album.album_logo_link}}" height="200" width="150" />
-          <h2>{{ album.album_title }}</h2>
+              <div class="card card-color text-white album-shadow m-5" style="width: 18rem;">
+                
+                <img class="card-img-top" src="{{album.album_logo_link}}" height="200" width="150" />
+                <div class="card-body">
+                  <div class="d-flex w-100 justify-content-between mb-3">
+                    <h2 class="card-title">{{ album.album_title }}</h2>
+                    <!-- Favourite-->
+                    <!-- If Album favourite, render the button with favorite class -->
+                    {% if album.is_favorite_album %}
+                    <button class="btn btn-outline fas fa-heart favorite" data-bookmark-url="{% url 'fpage:fav-album' %}" data-album-id="{{ album.id }}" onclick='favouriteAlbum(this)' role="button"></button>
 
-          <a href="{% url 'fpage:detail' album.id %}" class="btn btn-info" role="button">Details</a>
-          <!-- Favourite-->
-          <!-- If Album favourite, render the button with favorite class -->
-          {% if album.is_favorite_album %}
-          <button class="btn btn-outline fas fa-heart favorite" data-bookmark-url="{% url 'fpage:fav-album' %}" data-album-id="{{ album.id }}" onclick='favouriteAlbum(this)' role="button"></button>
-
-          <!-- If Album favourite, render the button with favorite class -->
-          {% else %}
-          <button class="btn btn-outline fas fa-heart" data-bookmark-url="{% url 'fpage:fav-album' %}" data-album-id="{{ album.id }}" onclick='favouriteAlbum(this)' role="button"></button>
-          {% endif %}
-          <!-- Delete-->
-          {% comment %} <a href="{% url 'fpage:album-delete' album.id %}" class="btn btn-info" role="button">Delete</a> {% endcomment %}
-          <button type="button" class="btn btn-danger deleteModalBtn" data-album-id="{{ album.id }}" data-toggle="modal" data-target="#deleteModal"> Delete</button>
-          <p></p>
+                    <!-- If Album favourite, render the button with favorite class -->
+                    {% else %}
+                    <button class="btn btn-outline fas fa-heart" data-bookmark-url="{% url 'fpage:fav-album' %}" data-album-id="{{ album.id }}" onclick='favouriteAlbum(this)' role="button"></button>
+                    {% endif %}
+                  </div>
+                  <a href="{% url 'fpage:detail' album.id %}" class="btn btn-info" role="button">View &raquo;</a>
+                  <!-- Delete-->
+                  {% comment %} <button type="button" class="btn btn-danger deleteModalBtn" data-album-id="{{ album.id }}" data-toggle="modal" data-target="#deleteModal"> Delete</button> {% endcomment %}
+          </div>
         </div>
       </li>
 
 
 
       {% endfor %}
+      
     </ul>
     <!--Modal-->
         <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
