@@ -1,21 +1,22 @@
 {% extends 'fpage/base.html' %}
+{% load static %}
 {% block content %}
 
-<div class="index-container m-5 ">
+<div class="detail-container m-5 ">
     <button type="button" class="btn btn-danger deleteModalBtn deletebtn" data-album-id="{{ album.id }}" data-toggle="modal" data-target="#deleteModal"> Delete</button>
     <div class="d-flex">
         <img src="{{ album.album_logo_link }}" width="400" height="300">
         <div class="ml-5 mt-5 d-flex flex-column  w-100 pl-5">
             <h1 style="color: green; font-weight: 550;">Title:  {{ album.album_title }}</h1>
-            <h2>Artist: {{ album.artist }}</h2>
-            <h3>Genre: {{album.genre}} <h3>
+            <h3>Artist: {{ album.artist }}</h2>
+            <h5>Genre: {{album.genre}} <h3>
         </div>
     </div>
     <form action="{% url 'fpage:fav-song' album.id %}" method="post">
-    <table class="table table-striped mt-5">
+    <table class="table table-striped">
             <tr>
                 <th> </th>
-                <th> Song Name</th>
+                <th> <a class="mx-2"></a>Song Name</th>
                 <th> Favourite </th>
             </tr>
         {% csrf_token %}
@@ -23,7 +24,8 @@
         <label for="song{{ forloop.counter }}"> 
             <tr>
                 <td><input type="checkbox" id="song{{ forloop.counter }}" name="song" value="{{ song.id }}" /></td>
-                <td>{{ song.song_title}}<td>
+                {% comment %} <td><img src="{% static 'images/Song.jpeg' %}" width="50" height="50"></td> {% endcomment %}
+                <td><img class="mx-3"src="{% static 'images/Song.jpeg' %}" width="50" height="50">{{song.song_title}}<td>
             {% if song.is_favorite %}
                 <button class="btn btn-outline fas fa-heart favorite" role="button"></button>
 
