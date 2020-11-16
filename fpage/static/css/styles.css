@@ -155,7 +155,14 @@ height: 50vh !important;
 .album-shadow{
   box-shadow: 10px 10px 12px #252525;
 }
+.deletebtn{
+  float: right;
+}
 
+.detail-container {
+  min-height: 100vh !important;
+  max-width: 1280px;
+}
 
 
 /* Registration Css */

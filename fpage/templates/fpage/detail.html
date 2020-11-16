@@ -1,23 +1,81 @@
 {% extends 'fpage/base.html' %}
+{% load static %}
 {% block content %}
-<div class="container">
-    <img src="{{ album.album_logo_link }}">
-    <h1>{{ album.album_title }}</h1>
-    <h2>{{ album.artist }}</h2>
+
+<div class="detail-container m-5 ">
+    <button type="button" class="btn btn-danger deleteModalBtn deletebtn" data-album-id="{{ album.id }}" data-toggle="modal" data-target="#deleteModal"> Delete</button>
+    <div class="d-flex">
+        <img src="{{ album.album_logo_link }}" width="400" height="300">
+        <div class="ml-5 mt-5 d-flex flex-column  w-100 pl-5">
+            <h1 style="color: green; font-weight: 550;">Title:  {{ album.album_title }}</h1>
+            <h3>Artist: {{ album.artist }}</h2>
+            <h5>Genre: {{album.genre}} <h3>
+        </div>
+    </div>
     <form action="{% url 'fpage:fav-song' album.id %}" method="post">
+    <table class="table table-striped">
+            <tr>
+                <th> </th>
+                <th> <a class="mx-2"></a>Song Name</th>
+                <th> Favourite </th>
+            </tr>
         {% csrf_token %}
         {% for song in album.song_set.all %}
-        <input type="radio" id="song{{ forloop.counter }}" name="song" value="{{ song.id }}" />
-        <label for="song{{ forloop.counter }}">
-            {{ song.song_title}}
+        <label for="song{{ forloop.counter }}"> 
+            <tr>
+                <td><input type="checkbox" id="song{{ forloop.counter }}" name="song" value="{{ song.id }}" /></td>
+                {% comment %} <td><img src="{% static 'images/Song.jpeg' %}" width="50" height="50"></td> {% endcomment %}
+                <td><img class="mx-3"src="{% static 'images/Song.jpeg' %}" width="50" height="50">{{song.song_title}}<td>
             {% if song.is_favorite %}
-            <img height="20" width="20"
-                src="https://cdn2.iconfinder.com/data/icons/crystalproject/crystal_project_256x256/apps/keditbookmarks.png" />
-    
+                <button class="btn btn-outline fas fa-heart favorite" role="button"></button>
+
+                    <!-- If Album favourite, render the button with favorite class -->
+            {% else %}
+                 <button class="btn btn-outline fas fa-heart" role="button"></button>
             {% endif %}
+        </tr>
         </label></br>
         {% endfor %}
-        <input type="submit" class="btn" value="Favorite">
+        </table>
+        <input type="submit" class="btn-primary" value="Favorite">
     </form>
-</div>
+     <!--Modal-->
+        <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Delete</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                Are you sure you want to Delete?
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+                <a type="button" class="btn btn-primary deleteAlbumBtn">Confirm</a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!--Modal-->
+    </div>
+ <div>
+ <script type="text/javascript">
+
+$(document).on('click', '.deleteModalBtn', function() {
+
+   // access the album id using data attribute
+    var albumID = $(this).data('album-id');
+
+    // generating the url for the album. Here the initial value of id is dummy which will be replaced each time the modal is called
+    var deleteUrl = "{% url 'fpage:album-delete' id=12345 %}".replace(/12345/, albumID.toString());
+
+    // add the dynamic href value to the modal's delete button
+    $('.deleteAlbumBtn').attr('href', deleteUrl);
+  })
+  // this function is triggered by the clicking of favorite button
+  // `elem` is the button which triggered the function
+</script>
 {% endblock content %}
