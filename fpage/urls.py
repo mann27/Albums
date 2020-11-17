@@ -20,6 +20,9 @@ urlpatterns = [
     path('register/', views.registerPage, name="register"),
 	path('login/', views.loginPage, name="login"),  
 	path('logout/', views.logoutUser, name="logout"),
+
+    path('account-delete/', views.delete_user, name="account-delete"),
+
     path('index/', views.index, name='index'),
 
     # Album CRUD

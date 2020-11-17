@@ -24,6 +24,9 @@ from django.http import JsonResponse
 def home(request):
     return render(request, 'fpage/home.html', context={})
 
+def delete_user(self):
+    self.user.delete()
+    return redirect('fpage:home')
 
 def registerPage(request):
     if request.user.is_authenticated:

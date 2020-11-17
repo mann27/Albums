@@ -37,7 +37,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'phonenumber_field'
+    'phonenumber_field',
+    'social_django',
 ]
 
 MIDDLEWARE = [
@@ -48,6 +49,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'social_django.middleware.SocialAuthExceptionMiddleware',
 ]
 
 ROOT_URLCONF = 'website.urls'
@@ -63,12 +65,23 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'social_django.context_processors.backends', 
+                'social_django.context_processors.login_redirect',
             ],
         },
     },
 ]
 
 WSGI_APPLICATION = 'website.wsgi.application'
+
+AUTHENTICATION_BACKENDS = (
+    'social_core.backends.github.GithubOAuth2',
+    'social_core.backends.twitter.TwitterOAuth',
+    'social_core.backends.facebook.FacebookOAuth2',
+    'social_core.backends.google.GoogleOAuth2',
+
+    'django.contrib.auth.backends.ModelBackend',
+)
 
 
 # Database
@@ -133,3 +146,27 @@ STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
 
 #For Development
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
+
+# Social Accounts
+
+# GOTO This link for setting the github social - https://github.com/settings/applications/new
+SOCIAL_AUTH_GITHUB_KEY = ''
+SOCIAL_AUTH_GITHUB_SECRET = ''
+
+# GOTO This link for setting the twitter social - https://developer.twitter.com/apps
+SOCIAL_AUTH_TWITTER_KEY = ''
+SOCIAL_AUTH_TWITTER_SECRET = ''
+
+# GOTO This link for setting the Facebook social - https://developers.facebook.com/
+SOCIAL_AUTH_FACEBOOK_KEY = ''
+SOCIAL_AUTH_FACEBOOK_SECRET = ''
+
+# GOTO This link for setting the Google social - https://console.cloud.google.com/
+SOCIAL_AUTH_GOOGLE_KEY = ''
+SOCIAL_AUTH_GOOGLE_SECRET = ''
+
+
+LOGIN_URL = 'fpage/login'
+LOGOUT_URL = 'fpage/logout'
+LOGIN_REDIRECT_URL = 'http://127.0.0.1:8000/'

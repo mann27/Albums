@@ -7,5 +7,6 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     # fpage app urls and namespaced by fpage
     path('', include('fpage.urls', namespace='fpage')),
-    path('', include('django.contrib.auth.urls'))
+    path('', include('django.contrib.auth.urls')),
+    path('oauth/', include('social_django.urls', namespace='social')),
 ]
