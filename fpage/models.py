@@ -32,3 +32,8 @@ class UserProfile(models.Model):
     phone_num=PhoneNumberField(null=True, blank=True, unique=True)
     fav_genre=models.CharField(max_length=50)
     profile_image = models.ImageField(default='profile.jpeg',null=True, blank=True)
+
+class Watchlater(models.Model):
+    watch_id = models.AutoField(primary_key=True)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    video_id = models.CharField(max_length=10000000, default="")

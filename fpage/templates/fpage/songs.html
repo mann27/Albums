@@ -25,6 +25,10 @@
                 <td>{{ song.is_favorite }}</td>
                 <td><a type="button" class="btn btn-warning" href="{%url 'fpage:song-update' song.id  %}">Update</a>
                     <a type="button" class="btn btn-danger" href="{%url 'fpage:song-delete' song.id  %}">Delete</a>
+                    <form action="/watchlater/" method="POST">{% csrf_token %}
+                    <input type="hidden" name="video_id" value="{{song.id}}">
+                    <button type="submit" class="btn btn-outline-info mt-2" id="submit_btn">Listen Later</button>
+                    </form>
                 </td>
             </tr>
             {% endfor %}
