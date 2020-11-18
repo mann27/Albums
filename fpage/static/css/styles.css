@@ -164,6 +164,26 @@ height: 50vh !important;
   max-width: 1280px;
 }
 
+/* Watch later */
+.watch-later-title{
+  color: rgb(158, 60, 60); 
+  text-align: center;
+}
+
+.watch-later-condition{
+  text-align: center;
+  padding-top: 5%;
+}
+
+.watch-later-card{
+  max-width: 940px;
+  padding-top: 0%;
+}
+
+.watch-later-name{
+  color: green; 
+  font-weight: 550;
+}
 
 /* Registration Css */
 

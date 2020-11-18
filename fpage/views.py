@@ -26,8 +26,14 @@ from django.db.models import Case, When
 def watchlater(request):
     if request.method == "POST":
         user = request.user
+
+        # we are storing the video_id in a variable of same name
         video_id = request.POST['video_id']
+
+        #filtering based on the user
         watch = Watchlater.objects.filter(user=user)
+
+        # for loop for checking if the video is there in watch later if not we will save it
         for i in watch:
             if video_id == i.video_id:
                 message = "Your Video is Already Added"
@@ -40,6 +46,8 @@ def watchlater(request):
         song = Song.objects.filter(id=video_id).first()
         return render(request, 'fpage/home.html', {'song': song, "message": message})
     
+    # Sorting based on the time and not on the basis of video_id  
+    # so if i add a video yesterday and then on today it will show today's video first and yesterday's video second
     wl = Watchlater.objects.filter(user=request.user)
     ids = []
     for i in wl:
