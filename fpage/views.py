@@ -1,3 +1,4 @@
+from django.db import models
 from django.shortcuts import get_object_or_404, render, redirect
 from django.template import loader
 from .forms import CreateUserForm,AlbumForm,SongForm,ProfileForm
@@ -22,6 +23,13 @@ from django.db.models import Case, When
 #class DetailView(generic.DetailView):
   #  model = Album
    # template_name='fpage/detail.html'
+def search(request):
+    query = request.GET.get("query")
+    song = Song.objects.all()
+    qs = song.filter(song_title__icontains=query)
+
+    return render(request, 'fpage/search.html', {'songs': qs,"query":query})
+
 
 def watchlater(request):
     if request.method == "POST":
