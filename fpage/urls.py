@@ -25,6 +25,9 @@ urlpatterns = [
 
     path('index/', views.index, name='index'),
 
+    #Watch-Later
+    path('watchlater/', views.watchlater, name='watchlater'),
+
     # Album CRUD
     path('album-list/', views.albumlist, name="album-list"),
     path('album-create/', views.albumCreate, name="album-create"),
