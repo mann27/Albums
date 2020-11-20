@@ -1,0 +1,25 @@
+{% extends 'fpage/base.html' %}
+{% block content %}
+{% load static %} 
+<div class="profile-container">
+{% for i in songs reversed %}
+<div class="card mb-3 watch-later-card">
+    <div class="row no-gutters">
+      <div class="col-md-4">
+        <img src="{% static 'images/Song.jpeg' %}" width="250" height="200" class="card-img" alt="...">
+      </div>
+      <div class="col-md-8">
+        <div class="card-body">
+          <h5 class="card-title watch-later-name">{{i.name}}</h5>
+          <p class="card-text">Song Name: {{i.song_title}}</p>
+        <p class="card-text">Album: {{i.album_title}}</p>
+          <a href=""><button class="btn btn-outline-danger">Listen Song</button></a>
+        </div>
+      </div>
+    </div>
+  </div>
+  {% endfor %}
+</div>
+</div>
+
+{% endblock %}

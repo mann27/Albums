@@ -51,6 +51,9 @@ urlpatterns = [
     path('fav-song-list/', views.favSong_list , name='fav-song-list'),
     path('fav-album-list/', views.favAlbum_list , name='fav-album-list'),
 
+    #search
+    path('search/', views.search , name='search'),
+
     #Reset
     path('password_change/done/', auth_views.PasswordChangeDoneView.as_view(template_name='registration/password_change_done.html'), 
         name='password_change_done'),
